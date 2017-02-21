@@ -1,5 +1,7 @@
 <?php
 
+//TODO Add Spatie
+
 return [
 
     /*
@@ -12,7 +14,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => 'Laravel',
+    'name' => 'ServicioMedico',
 
     /*
     |--------------------------------------------------------------------------
@@ -77,7 +79,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'es',
 
     /*
     |--------------------------------------------------------------------------

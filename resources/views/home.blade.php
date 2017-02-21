@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+{{--TODO, Style--}}
 @section('content')
 <div class="container">
     <div class="row">
