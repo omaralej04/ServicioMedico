@@ -69,6 +69,8 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $numeros = range(10, 99);
+
         return User::create([
             'nombre' => $data['nombre'],
             'apellido' => $data['apellido'],
