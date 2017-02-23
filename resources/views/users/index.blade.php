@@ -6,10 +6,89 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading">Usuarios</div>
+
                     <div class="panel-body">
+                        Listado de Usuarios
 
+                        <a href="{{ url('/users/create') }}" class="btn btn-success">
+                            <i class="fa fa-user"></i> Nuevo Usuario
+                        </a>
+                        <table class="table table-bordered">
+                            <tr>
+                                <th class="centrar">Nombre</th>
+                                <th class="centrar">Apellido</th>
+                                <th class="centrar">Cedula</th>
+                                <th class="centrar">Edad</th>
+                                <th class="centrar">Sexo</th>
+                                <th width="10%" colspan="2" class="centrar">Acciones</th>
+                            </tr>
+                            @foreach($users as $user)
+                                <tr>
+                                    <td>{{ $user->nombre }}</td>
+                                    <td>{{ $user->apellido }}</td>
+                                    <td class="centrar"> {{ $user->cedula }}</td>
+                                    <td class="centrar">{{ $user->edad }}</td>
+                                    <td class="centrar">@if($user->sexo=="Hombre")
+                                            <i class="fa fa-male fa-3x" aria-hidden="true"></i>
+                                        @else
+                                            <i class="fa fa-female fa-3x" aria-hidden="true"></i>
+                                        @endif
+                                    </td>
+                                    <td>
+                                            <a href="{{ url('users/'.$user->id.'/edit') }}" class="btn btn-primary">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-danger"
+                                                data-action="{{ url('/usuarios/'.$user->id) }}"
+                                                data-name="{{ $user->nombre . " " . $user->apellido . " C.I.: " . $user->cedula  }}"
+                                                data-toggle="modal" data-target="#confirm-delete">
+                                            <i class="fa fa-trash fa-1x"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            <tr>
+                                <td colspan="7" class="text-center">
+                                    {{ $users->links() }}
+                                </td>
+                            </tr>
+                        </table>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="confirm-delete" tabindex="-1"
+         role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
 
+                </div>
+                <div class="modal-body">
+                    <p>¿Seguro que desea eliminar este
+                        registro?</p>
+                    <p class="nombre"></p>
+                </div>
+                <div class="modal-footer">
+                    <form class="form-inline form-delete"
+                          role="form"
+                          method="POST"
+                          action="">
+                        {!! method_field('DELETE') !!}
+                        {!! csrf_field() !!}
+                        <button type="button"
+                                class="btn btn-default"
+                                data-dismiss="modal">Cancelar
+                        </button>
+                            <button id="delete-btn"
+                                    class="btn btn-danger"
+                                    title="Eliminar">Eliminar
+                            </button>
+                    </form>
                 </div>
             </div>
         </div>
