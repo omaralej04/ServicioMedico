@@ -94,8 +94,8 @@
                             <label for="sexo" class="col-md-4 control-label">Sexo</label>
 
                             <div class="col-md-6">
-                                <input id="sexo" name="sexo" type="radio" name="sexo" value="{{old('sexo')}}" checked>Hombre <br>
-                                <input id="sexo" name="sexo" type="radio" name="sexo" value="{{old('sexo')}}">Mujer
+                                <input id="sexo" name="sexo" type="radio" name="sexo" value="Hombre" checked>Hombre <br>
+                                <input id="sexo" name="sexo" type="radio" name="sexo" value="Mujer">Mujer
 
                                 @if ($errors->has('sexo'))
                                     <span class="help-block">

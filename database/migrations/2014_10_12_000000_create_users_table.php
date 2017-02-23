@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('cedula');
             $table->date('fecha_nacimiento');
             $table->integer('edad');
-            $table->enum('sexo', ['M', 'F']);
+            $table->string('sexo');
             $table->string('email')->unique();
             $table->string('telefono')->nullable();
             $table->string('celular')->nullable();
