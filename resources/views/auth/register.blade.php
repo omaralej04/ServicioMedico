@@ -94,12 +94,25 @@
                             <label for="sexo" class="col-md-4 control-label">Sexo</label>
 
                             <div class="col-md-6">
-                                <input id="sexo" name="sexo" type="radio" name="sexo" value="Hombre" checked>Hombre <br>
-                                <input id="sexo" name="sexo" type="radio" name="sexo" value="Mujer">Mujer
+                                <input id="sexo" type="radio" name="sexo" value="Hombre" checked>Hombre <br>
+                                <input id="sexo" type="radio" name="sexo" value="Mujer">Mujer
 
                                 @if ($errors->has('sexo'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('sexo') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('direccion') ? ' has-error' : '' }}">
+                            <label for="direccion" class="col-md-4 control-label">Direccion</label>
+
+                            <div class="col-md-6">
+                                <textarea id="direccion" class="form-control" name="direccion" required style="resize: none"></textarea>
+                                @if ($errors->has('direccion'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('direccion') }}</strong>
                                     </span>
                                 @endif
                             </div>
