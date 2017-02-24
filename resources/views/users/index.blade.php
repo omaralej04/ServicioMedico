@@ -13,35 +13,35 @@
                         <a href="{{ url('/users/create') }}" class="btn btn-success">
                             <i class="fa fa-user"></i> Nuevo Usuario
                         </a>
-                        <table class="table table-bordered">
+                        <table class="table table-bordered text-center">
                             <tr>
-                                <th class="centrar">Nombre</th>
-                                <th class="centrar">Apellido</th>
-                                <th class="centrar">Cedula</th>
-                                <th class="centrar">Edad</th>
-                                <th class="centrar">Sexo</th>
-                                <th width="10%" colspan="2" class="centrar">Acciones</th>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Cedula</th>
+                                <th>Edad</th>
+                                <th>Sexo</th>
+                                <th width="10%" colspan="2">Acciones</th>
                             </tr>
                             @foreach($users as $user)
                                 <tr>
                                     <td>{{ $user->nombre }}</td>
                                     <td>{{ $user->apellido }}</td>
-                                    <td class="centrar"> {{ $user->cedula }}</td>
-                                    <td class="centrar">{{ $user->edad }}</td>
-                                    <td class="centrar">@if($user->sexo=="Hombre")
-                                            <i class="fa fa-male fa-3x" aria-hidden="true"></i>
+                                    <td> {{ $user->cedula }}</td>
+                                    <td>{{ $user->edad }}</td>
+                                    <td>@if($user->sexo=="Hombre")
+                                            <i class="fa fa-male fa-2x" aria-hidden="true"></i>
                                         @else
-                                            <i class="fa fa-female fa-3x" aria-hidden="true"></i>
+                                            <i class="fa fa-female fa-2x" aria-hidden="true"></i>
                                         @endif
                                     </td>
                                     <td>
-                                            <a href="{{ url('users/'.$user->id.'/edit') }}" class="btn btn-primary">
-                                                <i class="fa fa-edit"></i>
-                                            </a>
+                                        <a href="{{ url('users/'.$user->id.'/edit') }}" class="btn btn-primary">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
                                     </td>
                                     <td>
                                         <button class="btn btn-danger"
-                                                data-action="{{ url('/usuarios/'.$user->id) }}"
+                                                data-action="{{ url('/users/'.$user->id) }}"
                                                 data-name="{{ $user->nombre . " " . $user->apellido . " C.I.: " . $user->cedula  }}"
                                                 data-toggle="modal" data-target="#confirm-delete">
                                             <i class="fa fa-trash fa-1x"></i>
@@ -84,10 +84,10 @@
                                 class="btn btn-default"
                                 data-dismiss="modal">Cancelar
                         </button>
-                            <button id="delete-btn"
-                                    class="btn btn-danger"
-                                    title="Eliminar">Eliminar
-                            </button>
+                        <button id="delete-btn"
+                                class="btn btn-danger"
+                                title="Eliminar">Eliminar
+                        </button>
                     </form>
                 </div>
             </div>
