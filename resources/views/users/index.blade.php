@@ -18,7 +18,6 @@
                                 <th>Nombre</th>
                                 <th>Apellido</th>
                                 <th>Cedula</th>
-                                <th>Edad</th>
                                 <th>Sexo</th>
                                 <th width="10%" colspan="2">Acciones</th>
                             </tr>
@@ -27,7 +26,6 @@
                                     <td>{{ $user->nombre }}</td>
                                     <td>{{ $user->apellido }}</td>
                                     <td> {{ $user->cedula }}</td>
-                                    <td>{{ $user->edad }}</td>
                                     <td>@if($user->sexo=="Hombre")
                                             <i class="fa fa-male fa-2x" aria-hidden="true"></i>
                                         @else

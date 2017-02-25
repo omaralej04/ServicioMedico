@@ -68,27 +68,6 @@
                                 </div>
                             </div>
 
-                            <div class="form-group{{ $errors->has('edad') ? ' has-error' : '' }}">
-                                <label for="nivel" class="col-md-4 control-label">Edad</label>
-
-                                <div class="col-md-6">
-                                    <select name="edad" id="edad" class="form-control">
-                                        <option value="">Selecciona</option>
-                                        <?php
-                                        $edades = range(18, 99);
-                                        ?>
-                                        @foreach ($edades as $edad)
-                                            <option value="{{$edad}}" @if(old('edad')=='edad') selected @endif>{{ $edad }}</option>
-                                        @endforeach
-                                    </select>
-                                    @if ($errors->has('edad'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('edad') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
                             <div class="form-group{{ $errors->has('sexo') ? ' has-error' : '' }}">
                                 <label for="sexo" class="col-md-4 control-label">Sexo</label>
 

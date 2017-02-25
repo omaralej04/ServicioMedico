@@ -47,7 +47,6 @@ class UsersController extends Controller
             'apellido' => 'required|max:255',
             'cedula' => 'required|max:10|unique:users',
             'fecha_nacimiento' => 'required|max:32',
-            'edad' => 'required|digits:2',
             'sexo' => 'required',
             'direccion' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
@@ -68,7 +67,6 @@ class UsersController extends Controller
                 'apellido' => $request->input('apellido'),
                 'cedula' => $request->input('cedula'),
                 'fecha_nacimiento' => $request->input('fecha_nacimiento'),
-                'edad' => $request->input('edad'),
                 'sexo' => $request->input('sexo'),
                 'direccion' => $request->input('direccion'),
                 'email' => $request->input('email'),
@@ -120,15 +118,13 @@ class UsersController extends Controller
         $v = Validator::make($request->all(), [
             'nombre' => 'required|max:255',
             'apellido' => 'required|max:255',
-            'cedula' => 'required|max:10|unique:users',
+            'cedula' => 'required|max:10|unique:users,cedula,'.$id.',id',
             'fecha_nacimiento' => 'required|max:32',
-            'edad' => 'required|digits:2',
             'sexo' => 'required',
             'direccion' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
+            'email' => 'required|email|max:255|unique:users,email,'.$id.',id',
             'telefono' => 'max:255',
             'celular' => 'max:255',
-            'password' => 'required|min:6|confirmed',
         ]);
 
         if ($v->fails()){
@@ -144,7 +140,6 @@ class UsersController extends Controller
                 'apellido' => $request->input('apellido'),
                 'cedula' => $request->input('cedula'),
                 'fecha_nacimiento' => $request->input('fecha_nacimiento'),
-                'edad' => $request->input('edad'),
                 'sexo' => $request->input('sexo'),
                 'direccion' => $request->input('direccion'),
                 'email' => $request->input('email'),

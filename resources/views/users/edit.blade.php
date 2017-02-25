@@ -14,7 +14,7 @@
                                 <label for="nombre" class="col-md-4 control-label">Nombre</label>
 
                                 <div class="col-md-6">
-                                    <input id="nombre" type="text" class="form-control" name="nombre" value="{{ old('nombre') }}" required autofocus>
+                                    <input id="nombre" type="text" class="form-control" name="nombre" value="{{ $user->nombre or old('nombre') }}" required autofocus>
 
                                     @if ($errors->has('nombre'))
                                         <span class="help-block">
@@ -28,7 +28,7 @@
                                 <label for="apellido" class="col-md-4 control-label">Apellido</label>
 
                                 <div class="col-md-6">
-                                    <input id="apellido" type="text" class="form-control" name="apellido" value="{{ old('apellido') }}" required>
+                                    <input id="apellido" type="text" class="form-control" name="apellido" value="{{ $user->apellido or old('apellido') }}" required>
 
                                     @if ($errors->has('apellido'))
                                         <span class="help-block">
@@ -38,13 +38,11 @@
                                 </div>
                             </div>
 
-                            {{--'telefono', 'celular', 'password'--}}
-
                             <div class="form-group{{ $errors->has('cedula') ? ' has-error' : '' }}">
                                 <label for="cedula" class="col-md-4 control-label">Cedula</label>
 
                                 <div class="col-md-6">
-                                    <input id="cedula" type="text" class="form-control" name="cedula" value="{{ old('cedula') }}" required>
+                                    <input id="cedula" type="text" class="form-control" name="cedula" value="{{ $user->cedula or old('cedula') }}" required>
 
                                     @if ($errors->has('cedula'))
                                         <span class="help-block">
@@ -58,32 +56,11 @@
                                 <label for="fecha_nacimiento" class="col-md-4 control-label">Fecha De Nacimiento</label>
 
                                 <div class="col-md-6">
-                                    <input id="fecha_nacimiento" type="date" class="form-control" name="fecha_nacimiento" value="{{ old('fecha_nacimiento') }}" required>
+                                    <input id="fecha_nacimiento" type="date" class="form-control" name="fecha_nacimiento" value="{{ $user->fecha_nacimiento or old('fecha_nacimiento') }}" required>
 
                                     @if ($errors->has('fecha_nacimiento'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('fecha_nacimiento') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('edad') ? ' has-error' : '' }}">
-                                <label for="nivel" class="col-md-4 control-label">Edad</label>
-
-                                <div class="col-md-6">
-                                    <select name="edad" id="edad" class="form-control">
-                                        <option value="">Selecciona</option>
-                                        <?php
-                                        $edades = range(18, 99);
-                                        ?>
-                                        @foreach ($edades as $edad)
-                                            <option value="{{$edad}}" @if(old('edad')=='edad') selected @endif>{{ $edad }}</option>
-                                        @endforeach
-                                    </select>
-                                    @if ($errors->has('edad'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('edad') }}</strong>
                                     </span>
                                     @endif
                                 </div>
@@ -108,7 +85,7 @@
                                 <label for="direccion" class="col-md-4 control-label">Direccion</label>
 
                                 <div class="col-md-6">
-                                    <textarea id="direccion" class="form-control" name="direccion" required style="resize: none"></textarea>
+                                    <textarea id="direccion" class="form-control" name="direccion" required style="resize: none">{{$user->direccion or old('direccion')}}</textarea>
                                     @if ($errors->has('direccion'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('direccion') }}</strong>
@@ -121,7 +98,7 @@
                                 <label for="email" class="col-md-4 control-label">E-Mail</label>
 
                                 <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+                                    <input id="email" type="email" class="form-control" name="email" value="{{$user->email or old('email') }}" required>
 
                                     @if ($errors->has('email'))
                                         <span class="help-block">
@@ -135,7 +112,7 @@
                                 <label for="telefono" class="col-md-4 control-label">Telefono (Opcional)</label>
 
                                 <div class="col-md-6">
-                                    <input id="telefono" type="tel" class="form-control" name="telefono" value="{{ old('telefono') }}">
+                                    <input id="telefono" type="tel" class="form-control" name="telefono" value="{{ $user->telefono or old('telefono') }}">
 
                                     @if ($errors->has('telefono'))
                                         <span class="help-block">
@@ -149,7 +126,7 @@
                                 <label for="celular" class="col-md-4 control-label">Celular (Opcional)</label>
 
                                 <div class="col-md-6">
-                                    <input id="celular" type="tel" class="form-control" name="celular" value="{{ old('celular') }}">
+                                    <input id="celular" type="tel" class="form-control" name="celular" value="{{  $user->celular or old('celular') }}">
 
                                     @if ($errors->has('celular'))
                                         <span class="help-block">
@@ -163,7 +140,7 @@
                                 <label for="password" class="col-md-4 control-label">Contraseña</label>
 
                                 <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control" name="password" required>
+                                    <input id="password" type="password" class="form-control" name="password">
 
                                     @if ($errors->has('password'))
                                         <span class="help-block">
@@ -177,14 +154,14 @@
                                 <label for="password-confirm" class="col-md-4 control-label">Confirmar Contraseña</label>
 
                                 <div class="col-md-6">
-                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">
-                                        Crear
+                                        Editar
                                     </button>
                                 </div>
                             </div>
@@ -195,3 +172,4 @@
         </div>
     </div>
 @endsection
+
