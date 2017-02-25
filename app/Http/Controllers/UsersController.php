@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\User;
 use Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class UsersController extends Controller
 {
@@ -53,6 +56,7 @@ class UsersController extends Controller
             'telefono' => 'max:255',
             'celular' => 'max:255',
             'password' => 'required|min:6|confirmed',
+            'role' => 'required'
         ]);
 
         if ($v->fails()){
@@ -74,6 +78,7 @@ class UsersController extends Controller
                 'celular' => $request->input('celular'),
                 'password' => bcrypt($request->input('password')),
             ]);
+            $user->assignRole($request->input('role'));
         }catch (\Exception $e) {
             \DB::rollback();
         }finally {
@@ -125,6 +130,7 @@ class UsersController extends Controller
             'email' => 'required|email|max:255|unique:users,email,'.$id.',id',
             'telefono' => 'max:255',
             'celular' => 'max:255',
+            'role' => 'required',
         ]);
 
         if ($v->fails()){
@@ -159,6 +165,9 @@ class UsersController extends Controller
                    'password' => bcrypt($request->input('password')),
                 ]);
             }
+
+            $user->syncRoles($request->input('role'));
+
         }catch (\Exception $e){
             \DB::rollback();
         }finally{
