@@ -77,7 +77,7 @@
                     <form class="form-inline form-delete"
                           role="form"
                           method="POST"
-                          action="">
+                          action="{{url('/users/'.$user->id)}}">
                         {!! method_field('DELETE') !!}
                         {!! csrf_field() !!}
                         <button type="button"
