@@ -34,7 +34,8 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        $roles = Role::all();
+        return view('users.create', ['roles'=>$roles]);
     }
 
     /**
@@ -107,8 +108,9 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
+        $roles = Role::all();
         $user = User::findOrFail($id);
-        return view('users.edit', ['user'=>$user]);
+        return view('users.edit', ['user'=>$user, 'roles'=>$roles]);
     }
 
     /**
