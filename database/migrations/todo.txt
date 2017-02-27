@@ -1,2 +1,0 @@
-//TODO Add Migrations
-// First (Paciente & Spatie)
