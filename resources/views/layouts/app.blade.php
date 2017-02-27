@@ -59,7 +59,7 @@
                             <li><a href="{{ url('/users') }}">Usuarios</a></li>
                             <li><a href="{{ url('/medicos') }}">Medicos</a></li>
                             <li><a href="{{ url('/farmaceutas') }}">Farmaceutas</a></li>
-                            <li><a href="{{ url('/secretaria') }}">Secretaria</a></li>
+                            <li><a href="{{ url('/secretaria') }}">Secretarias</a></li>
                             <li><a href="{{ url('/patologias') }}">Patologias</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

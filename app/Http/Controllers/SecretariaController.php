@@ -67,7 +67,7 @@ class SecretariaController extends Controller
         try {
             \DB::beginTransaction();
 
-            $medico = User::create([
+            $secretaria = User::create([
                 'nombre' => $request->input('nombre'),
                 'apellido' => $request->input('apellido'),
                 'cedula' => $request->input('cedula'),
@@ -79,14 +79,14 @@ class SecretariaController extends Controller
                 'celular' => $request->input('celular'),
                 'password' => bcrypt($request->input('password')),
             ]);
-            $medico->assignRole($request->input('role'));
+            $secretaria->assignRole('Secretaria');
         }catch (\Exception $e) {
             \DB::rollback();
         }finally {
             \DB::commit();
         }
 
-        return redirect('/secretarias')->with('mensaje', 'Usuario Creado');
+        return redirect('/secretaria')->with('mensaje', 'Usuario Creado');
     }
 
     /**
@@ -109,8 +109,8 @@ class SecretariaController extends Controller
     public function edit($id)
     {
         $roles = Role::all();
-        $medico = User::findOrFail($id);
-        return view('secretarias.edit', ['medico'=>$medico, 'roles'=>$roles]);
+        $secretaria = User::findOrFail($id);
+        return view('secretarias.edit', ['secretaria'=>$secretaria, 'roles'=>$roles]);
     }
 
     /**
@@ -142,8 +142,8 @@ class SecretariaController extends Controller
         try{
             \DB::beginTransaction();
 
-            $medico = User::findOrFail($id);
-            $medico->update([
+            $secretaria = User::findOrFail($id);
+            $secretaria->update([
                 'nombre' => $request->input('nombre'),
                 'apellido' => $request->input('apellido'),
                 'cedula' => $request->input('cedula'),
@@ -163,19 +163,19 @@ class SecretariaController extends Controller
                 if ($v->fails()){
                     return redirect()->back()->withErrors($v)->withInput();
                 }
-                $medico->update([
+                $secretaria->update([
                     'password' => bcrypt($request->input('password')),
                 ]);
             }
 
-            $medico->syncRoles($request->input('role'));
+            $secretaria->syncRoles('Secretaria');
 
         }catch (\Exception $e){
             \DB::rollback();
         }finally{
             \DB::commit();
         }
-        return redirect('/secretarias')->with('mensaje', 'Usuario Editado');
+        return redirect('/secretaria')->with('mensaje', 'Usuario Editado');
     }
 
     /**
@@ -187,6 +187,6 @@ class SecretariaController extends Controller
     public function destroy($id)
     {
         User::destroy($id);
-        return redirect('/secretarias')->with('mensaje', 'Usuario Eliminado');
+        return redirect('/secretaria')->with('mensaje', 'Usuario Eliminado');
     }
 }

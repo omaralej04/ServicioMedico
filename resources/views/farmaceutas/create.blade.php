@@ -6,7 +6,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Crear Usuario</div>
                     <div class="panel-body">
-                        <form class="form-horizontal" role="form" method="POST" action="{{ url('/medicos') }}">
+                        <form class="form-horizontal" role="form" method="POST" action="{{ url('/farmaceutas') }}">
                             {{ csrf_field() }}
                             {{ method_field('POST') }}
 
@@ -143,7 +143,7 @@
                                     <select name="role" id="role" class="form-control">
                                         <option value="">Seleccione</option>
                                         @foreach($roles as $role)
-                                            @if($role->name == 'Medico') <option value="{{$role->name}}">{{$role->name}}</option>@endif
+                                            @if($role->name == 'Farmaceuta') <option value="{{$role->name}}">{{$role->name}}</option>@endif
                                         @endforeach
                                     </select>
 

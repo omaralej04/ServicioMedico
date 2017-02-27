@@ -143,8 +143,8 @@
                                     <select name="role" id="role" class="form-control">
                                         <option value="">Seleccione</option>
                                         @foreach($roles as $role)
-                                            <option value="{{$role->name}}">{{$role->name}}</option>
-                                            @endforeach
+                                            @if($role->name == 'Paciente') <option value="{{$role->name}}">{{$role->name}}</option>@endif
+                                        @endforeach
                                     </select>
 
                                     @if ($errors->has('role'))
