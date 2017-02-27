@@ -24,3 +24,7 @@ Route::resource('/users', 'UsersController');
 Route::resource('/patologias', 'PatologiasController');
 
 Route::resource('/medicos', 'MedicosController');
+
+Route::resource('/farmaceutas', 'FarmaceutasController');
+
+Route::resource('/secretaria', 'SecretariaController');

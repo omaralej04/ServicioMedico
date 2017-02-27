@@ -5,12 +5,12 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Medicos</div>
+                    <div class="panel-heading">Secretarias</div>
 
                     <div class="panel-body">
-                        Listado de Medicos
+                        Listado de Secretarias
 
-                        <a href="{{ url('/medicos/create') }}" class="btn btn-success">
+                        <a href="{{ url('/secretaria/create') }}" class="btn btn-success">
                             <i class="fa fa-user"></i> Nuevo Usuario
                         </a>
                         <table class="table table-bordered text-center">
@@ -21,26 +21,26 @@
                                 <th>Sexo</th>
                                 <th width="10%" colspan="2">Acciones</th>
                             </tr>
-                            @foreach($medicos as $medico)
+                            @foreach($secretarias as $secretaria)
                                 <tr>
-                                    <td>{{ $medico->nombre }}</td>
-                                    <td>{{ $medico->apellido }}</td>
-                                    <td> {{ $medico->cedula }}</td>
-                                    <td>@if($medico->sexo=="Hombre")
+                                    <td>{{ $secretaria->nombre }}</td>
+                                    <td>{{ $secretaria->apellido }}</td>
+                                    <td> {{ $secretaria->cedula }}</td>
+                                    <td>@if($secretaria->sexo=="Hombre")
                                             <i class="fa fa-male fa-2x" aria-hidden="true"></i>
                                         @else
                                             <i class="fa fa-female fa-2x" aria-hidden="true"></i>
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="{{ url('medicos/'.$medico->id.'/edit') }}" class="btn btn-primary">
+                                        <a href="{{ url('secretaria/'.$secretaria->id.'/edit') }}" class="btn btn-primary">
                                             <i class="fa fa-edit"></i>
                                         </a>
                                     </td>
                                     <td>
                                         <button class="btn btn-danger"
-                                                data-action="{{ url('/medicos/'.$medico->id) }}"
-                                                data-name="{{ $medico->nombre . " " . $medico->apellido . " C.I.: " . $medico->cedula  }}"
+                                                data-action="{{ url('/secretaria/'.$secretaria->id) }}"
+                                                data-name="{{ $secretaria->nombre . " " . $secretaria->apellido . " C.I.: " . $secretaria->cedula  }}"
                                                 data-toggle="modal" data-target="#confirm-delete">
                                             <i class="fa fa-trash fa-1x"></i>
                                         </button>
@@ -49,7 +49,7 @@
                             @endforeach
                             <tr>
                                 <td colspan="7" class="text-center">
-                                    {{ $medicos->links() }}
+                                    {{ $secretarias->links() }}
                                 </td>
                             </tr>
                         </table>
@@ -75,7 +75,7 @@
                     <form class="form-inline form-delete"
                           role="form"
                           method="POST"
-                          action="{{url('/medicos/'.$medico->id)}}">
+                          action="{{url('/secretaria/'.$secretaria->id)}}">
                         {!! method_field('DELETE') !!}
                         {!! csrf_field() !!}
                         <button type="button"

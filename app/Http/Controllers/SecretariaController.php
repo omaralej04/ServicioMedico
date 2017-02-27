@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
-class UsersController extends Controller
+class SecretariaController extends Controller
 {
     public function __construct()
     {
@@ -23,8 +23,8 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::role('Paciente')->paginate();
-        return view('users.index', ['users' => $users]);
+        $secretarias = User::role('Secretaria')->paginate();
+        return view('secretarias.index', ['secretarias' => $secretarias]);
     }
 
     /**
@@ -35,7 +35,7 @@ class UsersController extends Controller
     public function create()
     {
         $roles = Role::all();
-        return view('users.create', ['roles'=>$roles]);
+        return view('secretarias.create', ['roles'=>$roles]);
     }
 
     /**
@@ -67,7 +67,7 @@ class UsersController extends Controller
         try {
             \DB::beginTransaction();
 
-            $user = User::create([
+            $medico = User::create([
                 'nombre' => $request->input('nombre'),
                 'apellido' => $request->input('apellido'),
                 'cedula' => $request->input('cedula'),
@@ -79,14 +79,14 @@ class UsersController extends Controller
                 'celular' => $request->input('celular'),
                 'password' => bcrypt($request->input('password')),
             ]);
-            $user->assignRole($request->input('role'));
+            $medico->assignRole($request->input('role'));
         }catch (\Exception $e) {
             \DB::rollback();
         }finally {
             \DB::commit();
         }
 
-        return redirect('/users')->with('mensaje', 'Usuario Creado');
+        return redirect('/secretarias')->with('mensaje', 'Usuario Creado');
     }
 
     /**
@@ -109,8 +109,8 @@ class UsersController extends Controller
     public function edit($id)
     {
         $roles = Role::all();
-        $user = User::findOrFail($id);
-        return view('users.edit', ['user'=>$user, 'roles'=>$roles]);
+        $medico = User::findOrFail($id);
+        return view('secretarias.edit', ['medico'=>$medico, 'roles'=>$roles]);
     }
 
     /**
@@ -142,8 +142,8 @@ class UsersController extends Controller
         try{
             \DB::beginTransaction();
 
-            $user = User::findOrFail($id);
-            $user->update([
+            $medico = User::findOrFail($id);
+            $medico->update([
                 'nombre' => $request->input('nombre'),
                 'apellido' => $request->input('apellido'),
                 'cedula' => $request->input('cedula'),
@@ -157,25 +157,25 @@ class UsersController extends Controller
 
             if ($request->input('password')){
                 $v = Validator::make($request->all(), [
-                   'password' => 'required|min:6|confirmed',
+                    'password' => 'required|min:6|confirmed',
                 ]);
 
                 if ($v->fails()){
                     return redirect()->back()->withErrors($v)->withInput();
                 }
-                $user->update([
-                   'password' => bcrypt($request->input('password')),
+                $medico->update([
+                    'password' => bcrypt($request->input('password')),
                 ]);
             }
 
-            $user->syncRoles($request->input('role'));
+            $medico->syncRoles($request->input('role'));
 
         }catch (\Exception $e){
             \DB::rollback();
         }finally{
-         \DB::commit();
+            \DB::commit();
         }
-        return redirect('/users')->with('mensaje', 'Usuario Editado');
+        return redirect('/secretarias')->with('mensaje', 'Usuario Editado');
     }
 
     /**
@@ -187,6 +187,6 @@ class UsersController extends Controller
     public function destroy($id)
     {
         User::destroy($id);
-        return redirect('/users')->with('mensaje', 'Usuario Eliminado');
+        return redirect('/secretarias')->with('mensaje', 'Usuario Eliminado');
     }
 }
