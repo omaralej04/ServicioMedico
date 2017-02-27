@@ -21,4 +21,4 @@ Route::get('/home', 'HomeController@index');
 
 Route::resource('/users', 'UsersController');
 
-//TODO Add routes
+Route::resource('/patologias', 'PatologiasController');

@@ -143,7 +143,7 @@
                                     <select name="role" id="role" class="form-control">
                                         <option value="">Seleccione</option>
                                         @foreach($roles as $role)
-                                            <option value="{{$role->name}}">{{$role->name}}</option>
+                                            <option value="{{ $role->name }}" @if($user->hasRole($role->name)) selected @endif>{{ $role->name }}</option>
                                         @endforeach
                                     </select>
 
