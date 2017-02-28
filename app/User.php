@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'nombre', 'apellido', 'cedula', 'fecha_nacimiento', 'edad', 'sexo', 'direccion', 'email', 'telefono', 'celular', 'password',
+        'nombre', 'apellido', 'cedula', 'fecha_nacimiento', 'edad', 'sexo', 'direccion', 'email', 'telefono', 'celular', 'password', 'patologia'
     ];
 
     /**
@@ -28,7 +28,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function nombreUsuario(){
-        return $this->nombre . " " . $this->apellido;
+    public function patologias(){
+        return $this->hasMany('App\Patologia');
     }
 }

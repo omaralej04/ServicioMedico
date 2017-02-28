@@ -56,6 +56,7 @@ class UsersController extends Controller
             'email' => 'required|email|max:255|unique:users',
             'telefono' => 'max:255',
             'celular' => 'max:255',
+            'especialidad' => 'max:255',
             'password' => 'required|min:6|confirmed',
             'role' => 'required'
         ]);
@@ -77,6 +78,7 @@ class UsersController extends Controller
                 'email' => $request->input('email'),
                 'telefono' => $request->input('telefono'),
                 'celular' => $request->input('celular'),
+                'especialidad' => $request->input('especialidad'),
                 'password' => bcrypt($request->input('password')),
             ]);
             $user->assignRole($request->input('role'));
@@ -132,6 +134,7 @@ class UsersController extends Controller
             'email' => 'required|email|max:255|unique:users,email,'.$id.',id',
             'telefono' => 'max:255',
             'celular' => 'max:255',
+            'especialidad' => 'max:255',
             'role' => 'required',
         ]);
 
@@ -153,6 +156,7 @@ class UsersController extends Controller
                 'email' => $request->input('email'),
                 'telefono' => $request->input('telefono'),
                 'celular' => $request->input('celular'),
+                'especialidad' => $request->input('especialidad'),
             ]);
 
             if ($request->input('password')){

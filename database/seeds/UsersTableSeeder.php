@@ -32,6 +32,7 @@ class UsersTableSeeder extends Seeder
             'sexo' => 'Mujer',
             'direccion' => 'Calle 1. Av. 3, Caracas',
             'email' => 'default@medico.com',
+            'especialidad' => 'Cardiologo',
             'password' => bcrypt('az0909az'),
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now(),

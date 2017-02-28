@@ -19,7 +19,7 @@
                                 <th>Apellido</th>
                                 <th>Cedula</th>
                                 <th>Sexo</th>
-                                <th width="10%" colspan="2">Acciones</th>
+                                <th width="10%" colspan="3">Acciones</th>
                             </tr>
                             @foreach($medicos as $medico)
                                 <tr>
@@ -35,6 +35,11 @@
                                     <td>
                                         <a href="{{ url('medicos/'.$medico->id.'/edit') }}" class="btn btn-primary">
                                             <i class="fa fa-edit"></i>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="{{ url('medicos/'.$medico->id.'/especialidades') }}" class="btn btn-default">
+                                            <i class="fa fa-stethoscope"></i>
                                         </a>
                                     </td>
                                     <td>
