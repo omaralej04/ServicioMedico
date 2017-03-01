@@ -13,46 +13,46 @@
                         <a href="{{ url('/secretaria/create') }}" class="btn btn-success">
                             <i class="fa fa-user"></i> Nuevo Usuario
                         </a>
-                        <table class="table table-bordered text-center">
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Apellido</th>
-                                <th>Cedula</th>
-                                <th>Sexo</th>
-                                <th width="10%" colspan="2">Acciones</th>
-                            </tr>
-                            @foreach($secretarias as $secretaria)
-                                <tr>
-                                    <td>{{ $secretaria->nombre }}</td>
-                                    <td>{{ $secretaria->apellido }}</td>
-                                    <td> {{ $secretaria->cedula }}</td>
-                                    <td>@if($secretaria->sexo=="Hombre")
-                                            <i class="fa fa-male fa-2x" aria-hidden="true"></i>
-                                        @else
-                                            <i class="fa fa-female fa-2x" aria-hidden="true"></i>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        <a href="{{ url('secretaria/'.$secretaria->id.'/edit') }}" class="btn btn-primary">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-danger"
-                                                data-action="{{ url('/secretaria/'.$secretaria->id) }}"
-                                                data-name="{{ $secretaria->nombre . " " . $secretaria->apellido . " C.I.: " . $secretaria->cedula  }}"
-                                                data-toggle="modal" data-target="#confirm-delete">
-                                            <i class="fa fa-trash fa-1x"></i>
-                                        </button>
-                                    </td>
-                                </tr>
+                            @foreach($users as $user)
+                                <div class="col-sm-4">
+                                    <div class="card text-center">
+                                        <div class="card-header">
+                                            I.D. #{{$user->id}}
+                                        </div>
+                                        <div class="card-block">
+                                            <h5 class="card-title">{{$user->nombre.' '.$user->apellido}}</h5>
+                                            <h6>
+                                                Cedula: {{$user->cedula}}
+                                            </h6>
+                                            <h6>Sexo:
+                                                @if($user->sexo=="Hombre")
+                                                    <i class="fa fa-male fa-2x" aria-hidden="true"></i>
+                                                @else
+                                                    <i class="fa fa-female fa-2x" aria-hidden="true"></i>
+                                                @endif</h6>
+                                        </div>
+                                        <div class="card-footer">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <a href="{{ url('users/'.$user->id.'/edit') }}"
+                                                       class="btn btn-primary">
+                                                        <i class="fa fa-edit"></i>
+                                                    </a>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <form method="POST" action="/users/{{ $user->id }}">
+                                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                        <input type="hidden" name="_method" value="DELETE"/>
+                                                        <button type="submit" class="btn btn-danger">
+                                                            <i class="fa fa-close"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             @endforeach
-                            <tr>
-                                <td colspan="7" class="text-center">
-                                    {{ $secretarias->links() }}
-                                </td>
-                            </tr>
-                        </table>
                     </div>
                 </div>
             </div>

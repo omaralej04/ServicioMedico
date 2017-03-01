@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Patologia;
 use App\User;
 use Validator;
 use Illuminate\Http\Request;
