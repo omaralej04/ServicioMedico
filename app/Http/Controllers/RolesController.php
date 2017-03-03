@@ -88,7 +88,7 @@ class RolesController extends Controller
      */
     public function edit($id)
     {
-        $role = User::findOrFail($id);
+        $role = Role::findOrFail($id);
         return view('roles.edit', ['role'=>$role]);
     }
 

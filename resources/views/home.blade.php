@@ -114,6 +114,23 @@
                 </div>
             </div>
 
+            <div class="col-sm-4">
+                <div class="card text-center" style="border-color: #ff9397;">
+                    <div class="card-block" >
+                        <h3 class="card-title">Roles</h3>
+                        <h6>
+                            Ir al area que muestra todos los Roles de Usuarios en el sistema.
+                            <span class="text-muted">Solo Administracion...</span>
+                        </h6>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{{ url('roles') }}"
+                           class="btn btn-danger">
+                            <i class="fa fa-angle-double-right"></i>&#8195;Ir
+                        </a>
+                    </div>
+                </div>
+            </div>
 
     </div>
 

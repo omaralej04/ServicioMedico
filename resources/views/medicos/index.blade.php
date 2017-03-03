@@ -10,6 +10,7 @@
                     <div class="col-md-12">
                         <a href="{{ url('/home') }}" class="btn btn-danger btn-block">
                             <i class="fa  fa-arrow-left"></i> Regresar
+                            </a>
                         <a href="{{ url('/medicos/create') }}" class="btn btn-success btn-block">
                             <i class="fa fa-user"></i> Nuevo Medico
                         </a>

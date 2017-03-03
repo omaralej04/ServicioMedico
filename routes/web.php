@@ -28,3 +28,5 @@ Route::resource('/farmaceutas', 'FarmaceutasController');
 Route::resource('/secretaria', 'SecretariaController');
 
 Route::resource('/medicinas', 'MedicinasController');
+
+Route::resource('/roles', 'RolesController');
