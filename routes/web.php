@@ -21,10 +21,7 @@ Route::get('/home', 'HomeController@index');
 
 Route::resource('/users', 'UsersController');
 
-Route::resource('/patologias', 'PatologiasController');
-
 Route::resource('/medicos', 'MedicosController');
-Route::get('/medicos/{id}/especialidades','MedicosController@especialidades');
 
 Route::resource('/farmaceutas', 'FarmaceutasController');
 

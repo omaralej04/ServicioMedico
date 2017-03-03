@@ -37,9 +37,16 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
-                    </a>
+                    <ul class="nav navbar-nav navbar-left">
+                        <li>
+                            <a class="" href="{{ url('/') }}">
+                                <h5>
+                                    {{ config('app.name', 'Laravel') }}
+                                </h5>
+                            </a>
+                        </li>
+                    </ul>
+
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
@@ -52,32 +59,20 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">Iniciar</a></li>
-                            <li><a href="{{ route('register') }}">Registrarse</a></li>
+                            <li><a href="{{ url('/login') }}"><i class="fa fa-user-circle-o fa-1x"></i>&#8195; Iniciar</a></li>
+                            <li><a href="{{ url('/register') }}"><i class="fa fa-vcard-o fa-1x"></i>&#8195; Registrarse</a></li>
                         @else
                             <li><a href="{{ url('/users') }}">Usuarios</a></li>
                             <li><a href="{{ url('/medicos') }}">Medicos</a></li>
                             <li><a href="{{ url('/farmaceutas') }}">Farmaceutas</a></li>
                             <li><a href="{{ url('/secretaria') }}">Secretarias</a></li>
-                            <li><a href="{{ url('/medicinas') }}">Medicinas</a></li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
+                            <li><a href="{{ url('/medicinas') }}">Medicinas&#8195;</a></li>
+                            <li><a href="{{route('logout')}}"
+                                onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();"><i class="fa fa-sign-out fa-1x"></i>LogOut!</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
                             </li>
                         @endif
                     </ul>

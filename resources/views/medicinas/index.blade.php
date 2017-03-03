@@ -3,81 +3,55 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Medicinas</div>
+                    <div class="panel-heading text-center">Medicinas</div>
+                    <br>
+                    <div class="col-md-12">
+                        <a href="{{ url('/home') }}" class="btn btn-danger btn-block">
+                            <i class="fa  fa-arrow-left"></i> Regresar
+                        <a href="{{ url('/medicinas/create') }}" class="btn btn-success btn-block">
+                            <i class="fa fa-archive"></i> Nueva Medicina
+                        </a>
+                        <br>
+                    </div>
 
                     <div class="panel-body">
-                        Listado de Medicinas
-
-                        <a href="{{ url('/medicinas/create') }}" class="btn btn-success">
-                            <i class="fa fa-user"></i> Nueva Medicina
-                        </a>
-                        <table class="table table-bordered text-center">
-                            <tr>
-                                <th>Nombre</th>
-                                <th width="10%" colspan="2">Acciones</th>
-                            </tr>
-                            @foreach($medicinas as $medicina)
-                                <tr>
-                                    <td>{{ $medicina->nombre }}</td>
-                                    <td>
-                                        <a href="{{ url('medicinas/'.$medicina->id.'/edit') }}" class="btn btn-primary">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-danger"
-                                                data-action="{{ url('/medicinas/'.$medicina->id) }}"
-                                                data-name="{{ $medicina->nombre }}"
-                                                data-toggle="modal" data-target="#confirm-delete">
-                                            <i class="fa fa-trash fa-1x"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            @endforeach
-                            <tr>
-                                <td colspan="7" class="text-center">
-                                    {{ $medicinas->links() }}
-                                </td>
-                            </tr>
-                        </table>
+                        @foreach($medicinas as $medicina)
+                            <div class="col-sm-4">
+                                <div class="card text-center">
+                                    <div class="card-header">
+                                        I.D. #{{$medicina->id}}
+                                    </div>
+                                    <div class="card-block">
+                                        <h5 class="card-title">{{$medicina->nombre}}</h5>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <a href="{{ url('medicinas/'.$medicina->id.'/edit') }}"
+                                                   class="btn btn-primary">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <form method="POST" action="/medicinas/{{ $medicina->id }}">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                    <input type="hidden" name="_method" value="DELETE"/>
+                                                    <button type="submit" class="btn btn-danger">
+                                                        <i class="fa fa-close"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="modal fade" id="confirm-delete" tabindex="-1"
-         role="dialog" aria-labelledby="myModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-
-                </div>
-                <div class="modal-body">
-                    <p>¿Seguro que desea eliminar este
-                        registro?</p>
-                    <p class="nombre"></p>
-                </div>
-                <div class="modal-footer">
-                    <form class="form-inline form-delete"
-                          role="form"
-                          method="POST"
-                          action="{{url('/medicinas/'.$medicina->id)}}">
-                        {!! method_field('DELETE') !!}
-                        {!! csrf_field() !!}
-                        <button type="button"
-                                class="btn btn-default"
-                                data-dismiss="modal">Cancelar
-                        </button>
-                        <button id="delete-btn"
-                                class="btn btn-danger"
-                                title="Eliminar">Eliminar
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
     </div>
 @endsection

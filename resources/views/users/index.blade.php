@@ -3,12 +3,14 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Usuarios</div>
+                    <div class="panel-heading text-center">Usuarios</div>
                     <br>
                     <div class="col-md-12">
-                        <a href="{{ url('/user/create') }}" class="btn btn-success btn-block">
+                        <a href="{{ url('/home') }}" class="btn btn-danger btn-block">
+                            <i class="fa  fa-arrow-left"></i> Regresar
+                        <a href="{{ url('/users/create') }}" class="btn btn-success btn-block">
                             <i class="fa fa-user"></i> Nuevo Usuario
                         </a>
                         <br>

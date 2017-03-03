@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -23,8 +25,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $userid = Auth::id();
+        $users = \DB::table('users')->where('id', '=', $userid)->get();
+        return view('home', ['users' => $users]);
     }
 
-    // TODO spatie functions
 }
