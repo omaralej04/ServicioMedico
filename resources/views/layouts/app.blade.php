@@ -62,14 +62,10 @@
                             <li><a href="{{ url('/login') }}"><i class="fa fa-user-circle-o fa-1x"></i>&#8195; Iniciar</a></li>
                             <li><a href="{{ url('/register') }}"><i class="fa fa-vcard-o fa-1x"></i>&#8195; Registrarse</a></li>
                         @else
-                            <li><a href="{{ url('/users') }}">Usuarios</a></li>
-                            <li><a href="{{ url('/medicos') }}">Medicos</a></li>
-                            <li><a href="{{ url('/farmaceutas') }}">Farmaceutas</a></li>
-                            <li><a href="{{ url('/secretaria') }}">Secretarias</a></li>
-                            <li><a href="{{ url('/medicinas') }}">Medicinas&#8195;</a></li>
+                            <li><a href="{{ url('/home') }}"><i class="fa fa-dashboard fa-1x"></i>&#8195;DashBoard&#8195;</a></li>
                             <li><a href="{{route('logout')}}"
                                 onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();"><i class="fa fa-sign-out fa-1x"></i>LogOut!</a>
+                                                     document.getElementById('logout-form').submit();"><i class="fa fa-sign-out fa-1x"></i>&#8195;LogOut!</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     {{ csrf_field() }}
                                 </form>
