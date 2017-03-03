@@ -34,6 +34,9 @@ class UsersController extends Controller
      */
     public function create()
     {
+        if(!Auth::user()->can('CreateUsers'))
+            abort(403,'Acceso Prohibido');
+
         $roles = Role::all();
         return view('users.create', ['roles'=>$roles]);
     }
@@ -110,6 +113,9 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
+        if(!Auth::user()->can('EditUsers'))
+            abort(403,'Acceso Prohibido');
+
         $roles = Role::all();
         $user = User::findOrFail($id);
         return view('users.edit', ['user'=>$user, 'roles'=>$roles]);
@@ -190,6 +196,9 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
+        if(!Auth::user()->can('DeleteUsers'))
+            abort(403, 'Permiso Denegado.');
+
         User::destroy($id);
         return redirect('/users')->with('mensaje', 'Usuario Eliminado');
     }

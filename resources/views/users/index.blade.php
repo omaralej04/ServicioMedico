@@ -11,7 +11,12 @@
                         <a href="{{ url('/home') }}" class="btn btn-danger btn-block">
                             <i class="fa  fa-arrow-left"></i> Regresar
                             </a>
+                        @if(Auth::user()->roles[0]->hasPermissionTo('CreateUsers') or Auth::user()->can('CreateUsers'))
                         <a href="{{ url('/users/create') }}" class="btn btn-success btn-block">
+                            <i class="fa fa-user"></i> Nuevo Usuario
+                        </a>
+                        @endif
+                        <a href="{{ url('/users/create') }}" class="btn btn-success btn-block disabled" disabled="true">
                             <i class="fa fa-user"></i> Nuevo Usuario
                         </a>
                         <br>

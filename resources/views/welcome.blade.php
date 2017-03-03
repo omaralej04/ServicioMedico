@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{{--TODO, style--}}
+
 <html lang="{{ config('app.locale') }}">
 <head>
     <link href="{{asset('css/font-awesome.css')}}" rel="stylesheet">
