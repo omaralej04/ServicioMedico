@@ -32,7 +32,6 @@ class UsersTableSeeder extends Seeder
             'sexo' => 'Mujer',
             'direccion' => 'Calle 1. Av. 3, Caracas',
             'email' => 'default@medico.com',
-            'especialidad' => 'Cardiologo',
             'password' => bcrypt('az0909az'),
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now(),
@@ -72,45 +71,6 @@ class UsersTableSeeder extends Seeder
             'sexo' => 'Hombre',
             'direccion' => 'Calle 2. Av. 3, Caracas',
             'email' => 'default@user.com',
-            'password' => bcrypt('az0909az'),
-            'created_at' => \Carbon\Carbon::now(),
-            'updated_at' => \Carbon\Carbon::now(),
-        ]);
-
-        DB::table('users')->insert([
-            'nombre' => 'Defaulterino',
-            'apellido'=>'Userino',
-            'cedula'=> '123',
-            'fecha_nacimiento' => '1000-01-01',
-            'sexo' => 'Hombre',
-            'direccion' => 'Calle 2. Av. 3, Caracas',
-            'email' => 'defaulterino@userino.com',
-            'password' => bcrypt('az0909az'),
-            'created_at' => \Carbon\Carbon::now(),
-            'updated_at' => \Carbon\Carbon::now(),
-        ]);
-
-        DB::table('users')->insert([
-            'nombre' => 'Loremito',
-            'apellido'=>'Usuarito',
-            'cedula'=> '987',
-            'fecha_nacimiento' => '1000-01-01',
-            'sexo' => 'Hombre',
-            'direccion' => 'Calle 2. Av. 3, Caracas',
-            'email' => 'default@loremito.com',
-            'password' => bcrypt('az0909az'),
-            'created_at' => \Carbon\Carbon::now(),
-            'updated_at' => \Carbon\Carbon::now(),
-        ]);
-
-        DB::table('users')->insert([
-            'nombre' => 'Manuel',
-            'apellido'=>'Diaz',
-            'cedula'=> '23685794',
-            'fecha_nacimiento' => '1000-01-01',
-            'sexo' => 'Hombre',
-            'direccion' => 'Calle 2. Av. 3, Caracas',
-            'email' => 'default@diaz.com',
             'password' => bcrypt('az0909az'),
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now(),

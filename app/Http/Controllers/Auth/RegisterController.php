@@ -54,7 +54,6 @@ class RegisterController extends Controller
             'apellido' => 'required|max:255',
             'cedula' => 'required|max:10|unique:users',
             'fecha_nacimiento' => 'required|max:32',
-            'edad' => 'required|digits:2',
             'sexo' => 'required',
             'direccion' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
@@ -72,14 +71,12 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $numeros = range(10, 99);
 
-        return User::create([
+        $user = User::create([
             'nombre' => $data['nombre'],
             'apellido' => $data['apellido'],
             'cedula' => $data['cedula'],
             'fecha_nacimiento' => $data['fecha_nacimiento'],
-            'edad' => $data['edad'],
             'sexo' => $data['sexo'],
             'direccion' => $data['direccion'],
             'email' => $data['email'],

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Especialidad;
 use App\User;
 use Validator;
 use Illuminate\Http\Request;
@@ -24,7 +25,8 @@ class MedicosController extends Controller
     public function index()
     {
         $medicos = User::role('Medico')->paginate();
-        return view('medicos.index', ['medicos' => $medicos]);
+        $especialidades = User::find(1)->especialidad()->paginate();
+        return view('medicos.index', ['medicos' => $medicos, 'especialidades' => $especialidades]);
     }
 
     /**
@@ -56,7 +58,6 @@ class MedicosController extends Controller
             'email' => 'required|email|max:255|unique:users',
             'telefono' => 'max:255',
             'celular' => 'max:255',
-            'especialidad' => 'max:255',
             'password' => 'required|min:6|confirmed',
             'role' => 'required'
         ]);
@@ -78,7 +79,6 @@ class MedicosController extends Controller
                 'email' => $request->input('email'),
                 'telefono' => $request->input('telefono'),
                 'celular' => $request->input('celular'),
-                'especialidad' => $request->input('especialidaad'),
                 'password' => bcrypt($request->input('password')),
             ]);
             $medico->assignRole($request->input('role'));
@@ -134,7 +134,6 @@ class MedicosController extends Controller
             'email' => 'required|email|max:255|unique:users,email,'.$id.',id',
             'telefono' => 'max:255',
             'celular' => 'max:255',
-            'especialidad' => 'max:255',
             'role' => 'required',
         ]);
 
@@ -156,7 +155,6 @@ class MedicosController extends Controller
                 'email' => $request->input('email'),
                 'telefono' => $request->input('telefono'),
                 'celular' => $request->input('celular'),
-                'especialidad' => $request->input('especialidad'),
             ]);
 
             if ($request->input('password')){

@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
+use App\Especialidad;
 
 class User extends Authenticatable
 {
@@ -16,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'nombre', 'apellido', 'cedula', 'fecha_nacimiento', 'sexo', 'direccion', 'email', 'telefono', 'celular', 'password', 'patologia'
+        'nombre', 'apellido', 'cedula', 'fecha_nacimiento', 'sexo', 'direccion', 'email', 'telefono', 'celular', 'password'
     ];
 
     /**
@@ -28,4 +29,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function especialidad() {
+        return $this->hasOne('App\Especialidad', 'user_id');
+    }
 }

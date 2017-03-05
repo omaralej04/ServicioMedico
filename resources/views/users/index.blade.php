@@ -15,10 +15,11 @@
                         <a href="{{ url('/users/create') }}" class="btn btn-success btn-block">
                             <i class="fa fa-user"></i> Nuevo Usuario
                         </a>
-                        @endif
+                        @else
                         <a href="{{ url('/users/create') }}" class="btn btn-success btn-block disabled" disabled="true">
                             <i class="fa fa-user"></i> Nuevo Usuario
                         </a>
+                        @endif
                         <br>
                     </div>
 
@@ -44,12 +45,20 @@
                                     <div class="card-footer">
                                         <div class="row">
                                             <div class="col-sm-6">
+                                            @if(Auth::user()->roles[0]->hasPermissionTo('UpdateUsers') or Auth::user()->can('UpdateUsers'))
                                                 <a href="{{ url('users/'.$user->id.'/edit') }}"
                                                    class="btn btn-primary">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
+                                                @else
+                                                    <a href="{{ url('users/'.$user->id.'/edit') }}"
+                                                       class="btn btn-primary disabled" disabled="">
+                                                        <i class="fa fa-edit"></i>
+                                                    </a>
+                                                @endif
                                             </div>
                                             <div class="col-sm-6">
+                                            @if(Auth::user()->roles[0]->hasPermissionTo('DeleteUsers') or Auth::user()->can('DeleteUsers'))
                                                 <form method="POST" action="/users/{{ $user->id }}">
                                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                     <input type="hidden" name="_method" value="DELETE"/>
@@ -57,6 +66,15 @@
                                                         <i class="fa fa-close"></i>
                                                     </button>
                                                 </form>
+                                                @else
+                                                    <form method="POST" action="/users/{{ $user->id }}">
+                                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                        <input type="hidden" name="_method" value="DELETE"/>
+                                                        <button type="submit" class="btn btn-danger disabled" disabled>
+                                                            <i class="fa fa-close"></i>
+                                                        </button>
+                                                    </form>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>

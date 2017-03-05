@@ -36,19 +36,5 @@ class UserHasRolesTableSeeder extends Seeder
             'user_id' => 5,
         ]);
 
-        DB::table('user_has_roles')->insert([
-            'role_id' => 5,
-            'user_id' => 6,
-        ]);
-
-        DB::table('user_has_roles')->insert([
-            'role_id' => 5,
-            'user_id' => 7,
-        ]);
-
-        DB::table('user_has_roles')->insert([
-            'role_id' => 5,
-            'user_id' => 8,
-        ]);
     }
 }

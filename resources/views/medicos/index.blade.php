@@ -11,9 +11,15 @@
                         <a href="{{ url('/home') }}" class="btn btn-danger btn-block">
                             <i class="fa  fa-arrow-left"></i> Regresar
                             </a>
+                        @if(Auth::user()->roles[0]->hasPermissionTo('CreateMedicos') or Auth::user()->can('CreateMedicos'))
                         <a href="{{ url('/medicos/create') }}" class="btn btn-success btn-block">
                             <i class="fa fa-user"></i> Nuevo Medico
                         </a>
+                        @else
+                            <a href="{{ url('/medicos/create') }}" class="btn btn-success btn-block disabled" disabled="">
+                                <i class="fa fa-user"></i> Nuevo Medico
+                            </a>
+                    @endif
                         <br>
                     </div>
 
@@ -39,17 +45,25 @@
                                     <div class="card-footer">
                                         <div class="row">
                                             <div class="col-sm-4">
+                                                @if(Auth::user()->roles[0]->hasPermissionTo('UpdateMedicos') or Auth::user()->can('UpdateMedicos'))
                                                 <a href="{{ url('medicos/'.$medico->id.'/edit') }}"
                                                    class="btn btn-primary">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
+                                                @else
+                                                    <a href="{{ url('medicos/'.$medico->id.'/edit') }}"
+                                                       class="btn btn-primary disabled" disabled="">
+                                                        <i class="fa fa-edit"></i>
+                                                    </a>
+                                                @endif
                                             </div>
                                             <div class="col-sm-4">
-                                                <a href="{{ url('medicos/'.$medico->id.'/especialidades') }}" class="btn btn-inverse btn-success">
+                                                <a href="{{ url('medicos/'.$medico->id.'/especialidades') }}" class="btn btn-inverse btn-success disabled">
                                                     <i class="fa fa-stethoscope"></i>
                                                     </a>
                                             </div>
                                             <div class="col-sm-4">
+                                                @if(Auth::user()->roles[0]->hasPermissionTo('DeleteMedicos') or Auth::user()->can('DeleteMedicos'))
                                                 <form method="POST" action="/medicos/{{ $medico->id }}">
                                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                     <input type="hidden" name="_method" value="DELETE"/>
@@ -57,6 +71,16 @@
                                                         <i class="fa fa-close"></i>
                                                     </button>
                                                 </form>
+                                                    @else
+                                                    <form method="POST" action="/medicos/{{ $medico->id }}">
+                                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                        <input type="hidden" name="_method" value="DELETE"/>
+                                                        <button type="submit" class="btn btn-danger disabled" disabled
+                                                        >
+                                                            <i class="fa fa-close"></i>
+                                                        </button>
+                                                    </form>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>

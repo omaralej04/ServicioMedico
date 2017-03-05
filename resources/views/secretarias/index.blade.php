@@ -11,10 +11,17 @@
                         <a href="{{ url('/home') }}" class="btn btn-danger btn-block">
                             <i class="fa  fa-arrow-left"></i> Regresar
                             </a>
+                @if(Auth::user()->roles[0]->hasPermissionTo('CreateSecretarias') or Auth::user()->can('CreateSecretarias'))
                         <a href="{{ url('/secretaria/create') }}" class="btn btn-success btn-block">
                             <i class="fa fa-user"></i> Nuevo Usuario
                         </a>
                         <br>
+                    @else
+                            <a href="{{ url('/secretaria/create') }}" class="btn btn-success btn-block disabled" disabled="">
+                                <i class="fa fa-user"></i> Nuevo Usuario
+                            </a>
+                            <br>
+                @endif
                     </div>
 
                     <div class="panel-body">
@@ -39,12 +46,20 @@
                                     <div class="card-footer">
                                         <div class="row">
                                             <div class="col-sm-6">
+                                        @if(Auth::user()->roles[0]->hasPermissionTo('UpdateSecretarias') or Auth::user()->can('UpdateSecretarias'))
                                                 <a href="{{ url('secretaria/'.$secretaria->id.'/edit') }}"
                                                    class="btn btn-primary">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
+                                            @else
+                                                    <a href="{{ url('secretaria/'.$secretaria->id.'/edit') }}"
+                                                       class="btn btn-primary disabled" disabled="">
+                                                        <i class="fa fa-edit"></i>
+                                                    </a>
+                                        @endif
                                             </div>
                                             <div class="col-sm-6">
+                                        @if(Auth::user()->roles[0]->hasPermissionTo('DeleteSecretarias') or Auth::user()->can('DeleteSecretarias'))
                                                 <form method="POST" action="/secretaria/{{ $secretaria->id }}">
                                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                     <input type="hidden" name="_method" value="DELETE"/>
@@ -52,6 +67,15 @@
                                                         <i class="fa fa-close"></i>
                                                     </button>
                                                 </form>
+                                            @else
+                                                    <form method="POST" action="/secretaria/{{ $secretaria->id }}">
+                                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                        <input type="hidden" name="_method" value="DELETE"/>
+                                                        <button type="submit" class="btn btn-danger disabled" disabled>
+                                                            <i class="fa fa-close"></i>
+                                                        </button>
+                                                    </form>
+                                        @endif
                                             </div>
                                         </div>
                                     </div>
