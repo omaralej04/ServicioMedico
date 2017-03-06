@@ -12,10 +12,10 @@ class Especialidad extends Model
     use Notifiable;
 
     protected $fillable = [
-        'nombre', 'user_id',
+        'nombre',
     ];
 
     public function user(){
-        return $this->belongsTo('App\User');
+        return $this->hasMany('App\User');
     }
 }

@@ -4,9 +4,9 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Crear Rol</div>
+                    <div class="panel-heading">Crear Permiso</div>
                     <div class="panel-body">
-                        <form class="form-horizontal" role="form" method="POST" action="{{ url('/roles') }}">
+                        <form class="form-horizontal" role="form" method="POST" action="{{ url('/permisos') }}">
                             {{ csrf_field() }}
                             {{ method_field('POST') }}
 

@@ -4,9 +4,9 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Editar Rol</div>
+                    <div class="panel-heading">Editar Permiso</div>
                     <div class="panel-body">
-                        <form class="form-horizontal" role="form" method="POST" action="{{ url('/roles/'.$role->id) }}">
+                        <form class="form-horizontal" role="form" method="POST" action="{{ url('/permisos/'.$permiso->id) }}">
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
 
@@ -14,7 +14,7 @@
                                 <label for="name" class="col-md-4 control-label">Nombre</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control" name="name" value="{{ $role->name or old('name') }}" required autofocus>
+                                    <input id="name" type="text" class="form-control" name="name" value="{{ $permiso->name or old('name') }}" required autofocus>
 
                                     @if ($errors->has('name'))
                                         <span class="help-block">

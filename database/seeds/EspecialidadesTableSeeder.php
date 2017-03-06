@@ -13,7 +13,6 @@ class EspecialidadesTableSeeder extends Seeder
     {
         DB::table('especialidads')->insert([
             'nombre' => 'Cardiologo',
-            'user_id' => '2',
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now()
         ]);

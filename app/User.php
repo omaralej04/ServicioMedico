@@ -17,7 +17,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'nombre', 'apellido', 'cedula', 'fecha_nacimiento', 'sexo', 'direccion', 'email', 'telefono', 'celular', 'password'
+        'nombre', 'apellido', 'cedula', 'fecha_nacimiento', 'sexo', 'direccion', 'email', 'telefono', 'celular',
+        'password', 'especialidad_id',
     ];
 
     /**
@@ -30,6 +31,6 @@ class User extends Authenticatable
     ];
 
     public function especialidad() {
-        return $this->hasOne('App\Especialidad', 'user_id');
+        return $this->belongsTo('App\Especialidad');
     }
 }

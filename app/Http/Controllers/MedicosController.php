@@ -28,8 +28,7 @@ class MedicosController extends Controller
             abort(403,'Acceso Prohibido');
 
         $medicos = User::role('Medico')->paginate();
-        $especialidades = Especialidad::with('user')->get();
-        return view('medicos.index', ['medicos' => $medicos, 'especialidades' => $especialidades]);
+        return view('medicos.index', ['medicos' => $medicos]);
     }
 
     /**
@@ -43,7 +42,8 @@ class MedicosController extends Controller
             abort(403,'Acceso Prohibido');
 
         $roles = Role::all();
-        return view('medicos.create', ['roles'=>$roles]);
+        $especialidades = Especialidad::all();
+        return view('medicos.create', ['roles'=>$roles, 'especialidades' => $especialidades]);
     }
 
     /**
@@ -66,6 +66,7 @@ class MedicosController extends Controller
             'celular' => 'max:255',
             'password' => 'required|min:6|confirmed',
             'role' => 'required',
+            'especialidad_id' => 'required'
         ]);
 
         if ($v->fails()){
@@ -86,6 +87,7 @@ class MedicosController extends Controller
                 'telefono' => $request->input('telefono'),
                 'celular' => $request->input('celular'),
                 'password' => bcrypt($request->input('password')),
+                'especialidad_id' => $request->input('especialidad_id'),
             ]);
             $medico->assignRole($request->input('role'));
         }catch (\Exception $e) {
@@ -120,8 +122,9 @@ class MedicosController extends Controller
             abort(403,'Acceso Prohibido');
 
         $roles = Role::all();
+        $especialidades = Especialidad::all();
         $medico = User::findOrFail($id);
-        return view('medicos.edit', ['medico'=>$medico, 'roles'=>$roles]);
+        return view('medicos.edit', ['medico'=>$medico, 'roles'=>$roles, 'especialidades'=>$especialidades]);
     }
 
     /**
@@ -144,6 +147,7 @@ class MedicosController extends Controller
             'telefono' => 'max:255',
             'celular' => 'max:255',
             'role' => 'required',
+            'especialidad_id' => 'required',
         ]);
 
         if ($v->fails()){
@@ -164,6 +168,7 @@ class MedicosController extends Controller
                 'email' => $request->input('email'),
                 'telefono' => $request->input('telefono'),
                 'celular' => $request->input('celular'),
+                'especialidad_id' => $request->input('especialidad_id')
             ]);
 
             if ($request->input('password')){

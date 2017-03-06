@@ -35,6 +35,7 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('az0909az'),
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now(),
+            'especialidad_id' => '1',
         ]);
 
         DB::table('users')->insert([

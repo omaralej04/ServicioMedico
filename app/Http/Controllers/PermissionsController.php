@@ -50,7 +50,7 @@ class PermissionsController extends Controller
     public function store(Request $request)
     {
         $v = Validator::make($request->all(), [
-            'name' => 'required|max:10|alpha',
+            'name' => 'required',
         ]);
 
         if ($v->fails()){
@@ -81,7 +81,8 @@ class PermissionsController extends Controller
      */
     public function show($id)
     {
-       //
+        $permiso = Permission::findOrFail($id);
+        return view('roles.show', ['role'=>$role]);
     }
 
     /**
@@ -109,7 +110,7 @@ class PermissionsController extends Controller
     public function update(Request $request, $id)
     {
         $v = Validator::make($request->all(), [
-            'name' => 'required|max:50|alpha',
+            'name' => 'required',
         ]);
 
         if ($v->fails()){

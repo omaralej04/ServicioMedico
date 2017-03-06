@@ -155,6 +155,25 @@
                                 </div>
                             </div>
 
+                            <div class="form-group{{ $errors->has('especialidad_id') ? ' has-error' : '' }}">
+                                <label for="especialidad_id" class="col-md-4 control-label">Especialidad</label>
+
+                                <div class="col-md-6">
+                                    <select name="especialidad_id" id="especialidad_id" class="form-control">
+                                        <option value="">Seleccione</option>
+                                        @foreach($especialidades as $especialidad)
+                                            <option value="{{ $especialidad->id }}">{{ $especialidad->nombre }}</option>
+                                        @endforeach
+                                    </select>
+
+                                    @if ($errors->has('especialidad_id'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('especialidad_id') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
                             <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                                 <label for="password" class="col-md-4 control-label">Contraseña</label>
 

@@ -35,6 +35,9 @@
                                         <h6>
                                             Cedula: {{$medico->cedula}}
                                         </h6>
+                                        <h6>
+                                            {{$medico->especialidad->nombre}}
+                                        </h6>
                                         <h6>Sexo:
                                             @if($medico->sexo=="Hombre")
                                                 <i class="fa fa-male fa-2x" aria-hidden="true"></i>
