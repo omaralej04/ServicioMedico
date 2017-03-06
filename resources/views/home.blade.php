@@ -3,8 +3,6 @@
 @section('content')
 
     <div class="col-md-9 col-md-offset-1">
-
-
         <div class="panel panel-default">
             <div class="panel-heading text-center"><h3>User DashBoard</h3></div>
             <div class="panel-body">
@@ -27,7 +25,27 @@
                         </div>
                     </div>
                 @endforeach
-                <div class="col-sm-4">
+
+                @if(Auth::user()->hasRole('Paciente'))
+                        <div class="col-sm-4">
+                            <div class="card text-center">
+                                <div class="card-block">
+                                    <h3 class="card-title">Citas</h3>
+                                    <h6>
+                                        Ir al area que muestra todos tus Citas con sus datos.
+                                        <span class="text-muted">Tambien Puedes Pedir Citas!</span>
+                                    </h6>
+                                </div>
+                                <div class="card-footer">
+                                        <a href="{{ url('404') }}"
+                                           class="btn btn-primary">
+                                            <i class="fa fa-angle-double-right"></i>&#8195;Ir
+                                        </a>
+                                </div>
+                            </div>
+                        </div>
+                @else
+                    <div class="col-sm-4">
                     <div class="card text-center">
                         <div class="card-block">
                             <h3 class="card-title">Usuarios</h3>
@@ -201,6 +219,7 @@
                         </div>
                     </div>
                 </div>
+                    @endif
 
             </div>
         </div>

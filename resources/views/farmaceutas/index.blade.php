@@ -9,11 +9,17 @@
                     <br>
                     <div class="col-md-12">
                         <a href="{{ url('/home') }}" class="btn btn-danger btn-block">
-                            <i class="fa  fa-arrow-left"></i> Regresar
+                            <i class="fa fa-arrow-left"></i> Regresar
                             </a>
-                        <a href="{{ url('/farmaceutas/create') }}" class="btn btn-success btn-block">
-                            <i class="fa fa-user"></i> Nuevo Usuario
-                        </a>
+                        @if(Auth::user()->roles[0]->hasPermissionTo('CreateFarmaceutas') or Auth::user()->can('CreateFarmaceutas'))
+                            <a href="{{ url('/farmaceutas/create') }}" class="btn btn-success btn-block">
+                                <i class="fa fa-user"></i> Nuevo Usuario
+                            </a>
+                        @else
+                            <a href="{{ url('/farmaceutas/create') }}" class="btn btn-success btn-block disabled" disabled="">
+                                <i class="fa fa-user"></i> Nuevo Usuario
+                            </a>
+                        @endif
                         <br>
                     </div>
 
@@ -39,12 +45,20 @@
                                     <div class="card-footer">
                                         <div class="row">
                                             <div class="col-sm-6">
+                                        @if(Auth::user()->roles[0]->hasPermissionTo('UpdateFarmaceutas') or Auth::user()->can('UpdateFarmaceutas'))
                                                 <a href="{{ url('farmaceutas/'.$farmaceuta->id.'/edit') }}"
                                                    class="btn btn-primary">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
+                                            @else
+                                                    <a href="{{ url('farmaceutas/'.$farmaceuta->id.'/edit') }}"
+                                                       class="btn btn-primary disabled" disabled="">
+                                                        <i class="fa fa-edit"></i>
+                                                    </a>
+                                        @endif
                                             </div>
                                             <div class="col-sm-6">
+                                        @if(Auth::user()->roles[0]->hasPermissionTo('DeleteFarmaceutas') or Auth::user()->can('DeleteFarmaceutas'))
                                                 <form method="POST" action="/farmaceutas/{{ $farmaceuta->id }}">
                                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                     <input type="hidden" name="_method" value="DELETE"/>
@@ -52,6 +66,15 @@
                                                         <i class="fa fa-close"></i>
                                                     </button>
                                                 </form>
+                                            @else
+                                                    <form method="POST" action="/farmaceutas/{{ $farmaceuta->id }}">
+                                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                        <input type="hidden" name="_method" value="DELETE"/>
+                                                        <button type="submit" class="btn btn-danger disabled" disabled>
+                                                            <i class="fa fa-close"></i>
+                                                        </button>
+                                                    </form>
+                                        @endif
                                             </div>
                                         </div>
                                     </div>

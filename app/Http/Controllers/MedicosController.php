@@ -24,8 +24,11 @@ class MedicosController extends Controller
      */
     public function index()
     {
+        if(!Auth::user()->can('ReadMedicos'))
+            abort(403,'Acceso Prohibido');
+
         $medicos = User::role('Medico')->paginate();
-        $especialidades = User::find(1)->especialidad()->paginate();
+        $especialidades = Especialidad::with('user')->get();
         return view('medicos.index', ['medicos' => $medicos, 'especialidades' => $especialidades]);
     }
 
@@ -36,6 +39,9 @@ class MedicosController extends Controller
      */
     public function create()
     {
+        if(!Auth::user()->can('CreateMedicos'))
+            abort(403,'Acceso Prohibido');
+
         $roles = Role::all();
         return view('medicos.create', ['roles'=>$roles]);
     }
@@ -59,7 +65,7 @@ class MedicosController extends Controller
             'telefono' => 'max:255',
             'celular' => 'max:255',
             'password' => 'required|min:6|confirmed',
-            'role' => 'required'
+            'role' => 'required',
         ]);
 
         if ($v->fails()){
@@ -110,6 +116,9 @@ class MedicosController extends Controller
      */
     public function edit($id)
     {
+        if(!Auth::user()->can('UpdateMedicos'))
+            abort(403,'Acceso Prohibido');
+
         $roles = Role::all();
         $medico = User::findOrFail($id);
         return view('medicos.edit', ['medico'=>$medico, 'roles'=>$roles]);
@@ -188,12 +197,15 @@ class MedicosController extends Controller
      */
     public function destroy($id)
     {
+        if(!Auth::user()->can('DeletePermisos'))
+            abort(403,'Acceso Prohibido');
+
         User::destroy($id);
         return redirect('/medicos')->with('mensaje', 'Usuario Eliminado');
     }
 
-    public function especialidades($id){
+    public function agregarEspecialidad($id){
         $medico = User::findOrFail($id);
-        return view('medicos.especialidades', ['medico' => $medico]);
+        return view('medicos.agregarespecialidad', ['medico' => $medico]);
     }
 }

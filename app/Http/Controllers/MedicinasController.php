@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Medicina;
+use Illuminate\Support\Facades\Auth;
 use Validator;
 
 class MedicinasController extends Controller
@@ -20,6 +21,9 @@ class MedicinasController extends Controller
      */
     public function index()
     {
+        if(!Auth::user()->can('ReadMedicinas'))
+            abort(403,'Acceso Prohibido');
+
         $medicinas = Medicina::paginate();
         return view('medicinas.index', ['medicinas' => $medicinas]);
     }
@@ -31,6 +35,9 @@ class MedicinasController extends Controller
      */
     public function create()
     {
+        if(!Auth::user()->can('CreateMedicinas'))
+            abort(403,'Acceso Prohibido');
+
         return view('medicinas.create');
     }
 
@@ -84,6 +91,9 @@ class MedicinasController extends Controller
      */
     public function edit($id)
     {
+        if(!Auth::user()->can('UpdateMedicinas'))
+            abort(403,'Acceso Prohibido');
+
         $medicina = Medicina::findOrFail($id);
         return view('medicinas.edit', ['medicina'=>$medicina]);
     }
@@ -128,6 +138,9 @@ class MedicinasController extends Controller
      */
     public function destroy($id)
     {
+        if(!Auth::user()->can('DeleteMedicinas'))
+            abort(403,'Acceso Prohibido');
+
         Medicina::destroy($id);
         return redirect('/medicinas')->with('mensaje', 'Medicina Eliminada');
     }

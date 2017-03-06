@@ -23,6 +23,9 @@ class SecretariaController extends Controller
      */
     public function index()
     {
+        if(!Auth::user()->can('ReadSecretarias'))
+            abort(403,'Acceso Prohibido');
+
         $secretarias = User::role('Secretaria')->paginate();
         return view('secretarias.index', ['secretarias' => $secretarias]);
     }
@@ -34,6 +37,9 @@ class SecretariaController extends Controller
      */
     public function create()
     {
+        if(!Auth::user()->can('CreateSecretarias'))
+            abort(403,'Acceso Prohibido');
+
         $roles = Role::all();
         return view('secretarias.create', ['roles'=>$roles]);
     }
@@ -108,6 +114,9 @@ class SecretariaController extends Controller
      */
     public function edit($id)
     {
+        if(!Auth::user()->can('UpdateSecretarias'))
+            abort(403,'Acceso Prohibido');
+
         $roles = Role::all();
         $secretaria = User::findOrFail($id);
         return view('secretarias.edit', ['secretaria'=>$secretaria, 'roles'=>$roles]);
@@ -186,6 +195,9 @@ class SecretariaController extends Controller
      */
     public function destroy($id)
     {
+        if(!Auth::user()->can('DeleteSecretarias'))
+            abort(403,'Acceso Prohibido');
+
         User::destroy($id);
         return redirect('/secretaria')->with('mensaje', 'Usuario Eliminado');
     }

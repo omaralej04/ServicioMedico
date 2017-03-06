@@ -23,6 +23,9 @@ class UsersController extends Controller
      */
     public function index()
     {
+        if(!Auth::user()->can('ReadUsers'))
+            abort(403,'Acceso Prohibido');
+
         $users = User::role('Paciente')->paginate();
         return view('users.index', ['users' => $users]);
     }

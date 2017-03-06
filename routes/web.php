@@ -19,7 +19,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 Route::resource('/users', 'UsersController');
+
 Route::resource('/medicos', 'MedicosController');
+Route::put('/medicos/{id}/agregarespecialidad', 'MedicosController@agregarEspecialidad');
+
 Route::resource('/farmaceutas', 'FarmaceutasController');
 Route::resource('/secretaria', 'SecretariaController');
 Route::resource('/medicinas', 'MedicinasController');

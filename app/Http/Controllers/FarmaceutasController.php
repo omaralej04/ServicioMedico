@@ -23,6 +23,9 @@ class FarmaceutasController extends Controller
      */
     public function index()
     {
+        if(!Auth::user()->can('ReadFarmaceutas'))
+            abort(403,'Acceso Prohibido');
+
         $farmaceutas = User::role('Farmaceuta')->paginate();
         return view('farmaceutas.index', ['farmaceutas' => $farmaceutas]);
     }
@@ -34,6 +37,9 @@ class FarmaceutasController extends Controller
      */
     public function create()
     {
+        if(!Auth::user()->can('CreateFarmaceutas'))
+            abort(403,'Acceso Prohibido');
+
         $roles = Role::all();
         return view('farmaceutas.create', ['roles'=>$roles]);
     }
@@ -108,6 +114,9 @@ class FarmaceutasController extends Controller
      */
     public function edit($id)
     {
+        if(!Auth::user()->can('UpdateFarmaceutas'))
+            abort(403,'Acceso Prohibido');
+
         $roles = Role::all();
         $farmaceuta = User::findOrFail($id);
         return view('farmaceutas.edit', ['farmaceuta'=>$farmaceuta, 'roles'=>$roles]);
@@ -186,6 +195,9 @@ class FarmaceutasController extends Controller
      */
     public function destroy($id)
     {
+        if(!Auth::user()->can('DeleteFarmaceutas'))
+            abort(403,'Acceso Prohibido');
+
         User::destroy($id);
         return redirect('/farmaceutas')->with('mensaje', 'Usuario Eliminado');
     }

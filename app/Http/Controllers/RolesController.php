@@ -22,6 +22,9 @@ class RolesController extends Controller
      */
     public function index()
     {
+        if(!Auth::user()->can('ReadRoles'))
+            abort(403,'Acceso Prohibido');
+
         $roles = Role::paginate();
         return view('roles.index', ['roles' => $roles]);
     }
@@ -33,6 +36,8 @@ class RolesController extends Controller
      */
     public function create()
     {
+        if(!Auth::user()->can('CreateRoles'))
+            abort(403,'Acceso Prohibido');
         return view('roles.create');
     }
 
@@ -88,6 +93,9 @@ class RolesController extends Controller
      */
     public function edit($id)
     {
+        if(!Auth::user()->can('UpdateRoles'))
+            abort(403,'Acceso Prohibido');
+
         $role = Role::findOrFail($id);
         return view('roles.edit', ['role'=>$role]);
     }
@@ -117,12 +125,6 @@ class RolesController extends Controller
                 'name' => $request->input('name'),
             ]);
 
-            if ($request->input('password')){
-                $v = Validator::make($request->all(), [
-                    'password' => 'required|min:6|confirmed',
-                ]);
-            }
-
         }catch (\Exception $e){
             \DB::rollback();
         }finally{
@@ -139,6 +141,9 @@ class RolesController extends Controller
      */
     public function destroy($id)
     {
+        if(!Auth::user()->can('DeleteRoles'))
+            abort(403,'Acceso Prohibido');
+
         try{
             \DB::beginTransaction();
             Role::destroy($id);
