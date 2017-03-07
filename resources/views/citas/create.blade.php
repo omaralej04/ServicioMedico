@@ -4,9 +4,9 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Crear Secretaria</div>
+                    <div class="panel-heading">Crear Usuario</div>
                     <div class="panel-body">
-                        <form class="form-horizontal" role="form" method="POST" action="{{ url('/secretaria') }}">
+                        <form class="form-horizontal" role="form" method="POST" action="{{ url('/users') }}">
                             {{ csrf_field() }}
                             {{ method_field('POST') }}
 
@@ -143,7 +143,7 @@
                                     <select name="role" id="role" class="form-control">
                                         <option value="">Seleccione</option>
                                         @foreach($roles as $role)
-                                            @if($role->name == 'Secretaria') <option value="{{$role->name}}">{{$role->name}}</option>@endif
+                                            @if($role->name == 'Paciente') <option value="{{$role->name}}">{{$role->name}}</option>@endif
                                         @endforeach
                                     </select>
 
@@ -191,4 +191,3 @@
         </div>
     </div>
 @endsection
-
