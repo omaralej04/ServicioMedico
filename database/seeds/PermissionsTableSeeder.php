@@ -185,5 +185,30 @@ class PermissionsTableSeeder extends Seeder
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now()
         ]);
+
+        //Especialidades
+        DB::table('permissions')->insert([
+            'name' => 'ReadEspecialidades',
+            'created_at' => \Carbon\Carbon::now(),
+            'updated_at' => \Carbon\Carbon::now()
+        ]);
+
+        DB::table('permissions')->insert([
+            'name' => 'CreateEspecialidades',
+            'created_at' => \Carbon\Carbon::now(),
+            'updated_at' => \Carbon\Carbon::now()
+        ]);
+
+        DB::table('permissions')->insert([
+            'name' => 'UpdateEspecialidades',
+            'created_at' => \Carbon\Carbon::now(),
+            'updated_at' => \Carbon\Carbon::now()
+        ]);
+
+        DB::table('permissions')->insert([
+            'name' => 'DeleteEspecialidades',
+            'created_at' => \Carbon\Carbon::now(),
+            'updated_at' => \Carbon\Carbon::now()
+        ]);
     }
 }

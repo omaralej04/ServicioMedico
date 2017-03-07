@@ -208,9 +208,4 @@ class MedicosController extends Controller
         User::destroy($id);
         return redirect('/medicos')->with('mensaje', 'Usuario Eliminado');
     }
-
-    public function agregarEspecialidad($id){
-        $medico = User::findOrFail($id);
-        return view('medicos.agregarespecialidad', ['medico' => $medico]);
-    }
 }

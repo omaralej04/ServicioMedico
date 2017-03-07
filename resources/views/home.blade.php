@@ -146,29 +146,54 @@
                 </div>
 
                 <div class="col-sm-4">
-                    <div class="card text-center">
-                        <div class="card-block">
-                            <h3 class="card-title">Medicinas</h3>
-                            <h6>
-                                Ir al area que muestra todos las Medicinas en el sistema.
-                                <span class="text-muted">Con su Nombre</span>
-                            </h6>
+                            <div class="card text-center">
+                                <div class="card-block">
+                                    <h3 class="card-title">Medicinas</h3>
+                                    <h6>
+                                        Ir al area que muestra todos las Medicinas en el sistema.
+                                        <span class="text-muted">Con su Nombre</span>
+                                    </h6>
+                                </div>
+                                <div class="card-footer">
+                                    @if(Auth::user()->roles[0]->hasPermissionTo('ReadMedicinas') or Auth::user()->can('ReadMedicinas'))
+                                        <a href="{{ url('medicinas') }}"
+                                           class="btn btn-primary">
+                                            <i class="fa fa-angle-double-right"></i>&#8195;Ir
+                                        </a>
+                                    @else
+                                        <a href="{{ url('medicinas') }}"
+                                           class="btn btn-primary disabled" disabled="">
+                                            <i class="fa fa-angle-double-right"></i>&#8195;Ir
+                                        </a>
+                                    @endif
+                                </div>
+                            </div>
                         </div>
-                        <div class="card-footer">
-                            @if(Auth::user()->roles[0]->hasPermissionTo('ReadMedicinas') or Auth::user()->can('ReadMedicinas'))
-                                <a href="{{ url('medicinas') }}"
-                                   class="btn btn-primary">
-                                    <i class="fa fa-angle-double-right"></i>&#8195;Ir
-                                </a>
-                            @else
-                                <a href="{{ url('medicinas') }}"
-                                   class="btn btn-primary disabled" disabled="">
-                                    <i class="fa fa-angle-double-right"></i>&#8195;Ir
-                                </a>
-                            @endif
+
+                        <div class="col-sm-4">
+                            <div class="card text-center" style="border-color: #ff9397;">
+                                <div class="card-block" >
+                                    <h3 class="card-title">Especialidades</h3>
+                                    <h6>
+                                        Ir al area que muestra todos las Especialidades de Medicos en el sistema.
+                                        <span class="text-muted">Solo Administracion...</span>
+                                    </h6>
+                                </div>
+                                <div class="card-footer">
+                            @if(Auth::user()->roles[0]->hasPermissionTo('ReadEspecialidades') or Auth::user()->can('ReadEspecialidades'))
+                                        <a href="{{ url('especialidades') }}"
+                                           class="btn btn-danger">
+                                            <i class="fa fa-angle-double-right"></i>&#8195;Ir
+                                        </a>
+                                    @else
+                                        <a href="{{ url('especialidades') }}"
+                                           class="btn btn-danger disabled" disabled="">
+                                            <i class="fa fa-angle-double-right"></i>&#8195;Ir
+                                        </a>
+                                    @endif
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
 
                 <div class="col-sm-4">
                     <div class="card text-center" style="border-color: #ff9397;">

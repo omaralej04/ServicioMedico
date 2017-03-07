@@ -116,7 +116,7 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        if(!Auth::user()->can('EditUsers'))
+        if(!Auth::user()->can('UpdateUsers'))
             abort(403,'Acceso Prohibido');
 
         $roles = Role::all();

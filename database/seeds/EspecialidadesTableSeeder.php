@@ -16,5 +16,23 @@ class EspecialidadesTableSeeder extends Seeder
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now()
         ]);
+
+        DB::table('especialidads')->insert([
+            'nombre' => 'Traumatologo',
+            'created_at' => \Carbon\Carbon::now(),
+            'updated_at' => \Carbon\Carbon::now()
+        ]);
+
+        DB::table('especialidads')->insert([
+            'nombre' => 'Pediatra',
+            'created_at' => \Carbon\Carbon::now(),
+            'updated_at' => \Carbon\Carbon::now()
+        ]);
+
+        DB::table('especialidads')->insert([
+           'nombre' => 'Medico Familiar',
+           'created_at' =>  \Carbon\Carbon::now(),
+            'updated_at' => \Carbon\Carbon::now()
+        ]);
     }
 }
