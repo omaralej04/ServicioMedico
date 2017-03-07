@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Especialidad;
 use App\User;
-use Validator;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Validator;
+use Auth;
 
 class MedicosController extends Controller
 {

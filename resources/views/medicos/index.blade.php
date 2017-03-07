@@ -47,7 +47,7 @@
                                     </div>
                                     <div class="card-footer">
                                         <div class="row">
-                                            <div class="col-sm-4">
+                                            <div class="col-sm-6">
                                                 @if(Auth::user()->roles[0]->hasPermissionTo('UpdateMedicos') or Auth::user()->can('UpdateMedicos'))
                                                 <a href="{{ url('medicos/'.$medico->id.'/edit') }}"
                                                    class="btn btn-primary">
@@ -60,12 +60,7 @@
                                                     </a>
                                                 @endif
                                             </div>
-                                            <div class="col-sm-4">
-                                                <a href="{{ url('medicos/'.$medico->id.'/especialidades') }}" class="btn btn-inverse btn-success disabled">
-                                                    <i class="fa fa-stethoscope"></i>
-                                                    </a>
-                                            </div>
-                                            <div class="col-sm-4">
+                                            <div class="col-sm-6">
                                                 @if(Auth::user()->roles[0]->hasPermissionTo('DeleteMedicos') or Auth::user()->can('DeleteMedicos'))
                                                 <form method="POST" action="/medicos/{{ $medico->id }}">
                                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
