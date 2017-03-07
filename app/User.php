@@ -33,4 +33,8 @@ class User extends Authenticatable
     public function especialidad() {
         return $this->belongsTo('App\Especialidad');
     }
+
+    public function cita() {
+        return $this->belongsToMany('App\Cita');
+    }
 }

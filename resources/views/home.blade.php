@@ -180,17 +180,17 @@
                                 </h6>
                             </div>
                             <div class="card-footer">
-                                {{--@if(Auth::user()->roles[0]->hasPermissionTo('ReadCitas') or Auth::user()->can('ReadCitas'))--}}
-                                {{--<a href="{{ url('medicinas') }}"--}}
-                                {{--class="btn btn-primary">--}}
-                                {{--<i class="fa fa-angle-double-right"></i>&#8195;Ir--}}
-                                {{--</a>--}}
-                                {{--@else--}}
+                                @if(Auth::user()->roles[0]->hasPermissionTo('ReadCitas') or Auth::user()->can('ReadCitas'))
+                                <a href="{{ url('citas') }}"
+                                class="btn btn-primary">
+                                <i class="fa fa-angle-double-right"></i>&#8195;Ir
+                                </a>
+                                @else
                                 <a href="{{ url('citas') }}"
                                    class="btn btn-primary disabled" disabled="">
                                     <i class="fa fa-angle-double-right"></i>&#8195;Ir
                                 </a>
-                                {{--@endif--}}
+                                @endif
                             </div>
                         </div>
                     </div>

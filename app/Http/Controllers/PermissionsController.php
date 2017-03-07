@@ -81,8 +81,7 @@ class PermissionsController extends Controller
      */
     public function show($id)
     {
-        $permiso = Permission::findOrFail($id);
-        return view('roles.show', ['role'=>$role]);
+        //
     }
 
     /**

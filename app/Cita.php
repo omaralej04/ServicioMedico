@@ -2,24 +2,24 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Database\Eloquent\Model;
 use App\User;
 
-class Especialidad extends Model
+class Cita extends Model
 {
     use Notifiable;
 
     protected $fillable = [
-        'nombre',
+        'fecha_cita', 'hora', 'observaciones'
     ];
 
     public function user(){
         return $this->hasMany('App\User');
     }
 
-    public function cita() {
-        return $this->belongsToMany('App\Cita');
+    public function especialidad(){
+        return $this->hasMany('App\Especialidad');
     }
 }

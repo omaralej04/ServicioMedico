@@ -172,6 +172,26 @@ class RolesHasPermissionsTableSeeder extends Seeder
             'permission_id' => 32,
         ]);
 
+        DB::table('role_has_permissions')->insert([
+            'role_id' => 1,
+            'permission_id' => 33,
+        ]);
+
+        DB::table('role_has_permissions')->insert([
+            'role_id' => 1,
+            'permission_id' => 34,
+        ]);
+
+        DB::table('role_has_permissions')->insert([
+            'role_id' => 1,
+            'permission_id' => 35,
+        ]);
+
+        DB::table('role_has_permissions')->insert([
+            'role_id' => 1,
+            'permission_id' => 36,
+        ]);
+
         //Medico Permissions
         DB::table('role_has_permissions')->insert([
             'role_id' => 2,
@@ -201,6 +221,16 @@ class RolesHasPermissionsTableSeeder extends Seeder
         DB::table('role_has_permissions')->insert([
             'role_id' => 2,
             'permission_id' => 18,
+        ]);
+
+        DB::table('role_has_permissions')->insert([
+            'role_id' => 2,
+            'permission_id' => 33,
+        ]);
+
+        DB::table('role_has_permissions')->insert([
+            'role_id' => 2,
+            'permission_id' => 34,
         ]);
 
         //Farmaceuta Permissions
@@ -234,6 +264,7 @@ class RolesHasPermissionsTableSeeder extends Seeder
             'permission_id' => 19,
         ]);
 
+        //Secretarias
         DB::table('role_has_permissions')->insert([
             'role_id' => 4,
             'permission_id' => 1,
@@ -282,6 +313,20 @@ class RolesHasPermissionsTableSeeder extends Seeder
         DB::table('role_has_permissions')->insert([
             'role_id' => 4,
             'permission_id' => 17,
+        ]);
+        DB::table('role_has_permissions')->insert([
+            'role_id' => 4,
+            'permission_id' => 33,
+        ]);
+
+        DB::table('role_has_permissions')->insert([
+            'role_id' => 4,
+            'permission_id' => 34,
+        ]);
+
+        DB::table('role_has_permissions')->insert([
+            'role_id' => 4,
+            'permission_id' => 35,
         ]);
     }
 }
