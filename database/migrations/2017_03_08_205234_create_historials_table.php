@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCitasTable extends Migration
+class CreateHistorialsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,7 @@ class CreateCitasTable extends Migration
      */
     public function up()
     {
-        Schema::create('citas', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('fecha_cita');
-            $table->string('hora');
-            $table->text('observaciones');
-            $table->timestamps();
-        });
+        //
     }
 
     /**
@@ -29,6 +23,6 @@ class CreateCitasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('citas');
+        //
     }
 }

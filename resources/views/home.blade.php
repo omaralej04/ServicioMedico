@@ -44,6 +44,42 @@
                             </div>
                         </div>
                     </div>
+
+                        <div class="col-sm-4" style="min-height: 250px;">
+                            <div class="card text-center">
+                                <div class="card-block">
+                                    <h3 class="card-title">Recipes</h3>
+                                    <h6>
+                                        Ir al area que muestra todos tus Recipes con sus datos.
+                                        <span class="text-muted">Recetas y Observaciones</span>
+                                    </h6>
+                                </div>
+                                <div class="card-footer">
+                                    <a href="{{ url('404') }}"
+                                       class="btn btn-primary">
+                                        <i class="fa fa-angle-double-right"></i>&#8195;Ir
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4" style="min-height: 250px;">
+                            <div class="card text-center">
+                                <div class="card-block">
+                                    <h3 class="card-title">Entregas</h3>
+                                    <h6>
+                                        Ir al area que muestra tus Entregas pendientes.
+                                        <span class="text-muted">De Medicinas con su status</span>
+                                    </h6>
+                                </div>
+                                <div class="card-footer">
+                                    <a href="{{ url('404') }}"
+                                       class="btn btn-primary">
+                                        <i class="fa fa-angle-double-right"></i>&#8195;Ir
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                 @else
                     <div class="col-sm-4" style="min-height: 250px;">
                         <div class="card text-center">

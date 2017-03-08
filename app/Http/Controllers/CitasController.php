@@ -29,7 +29,9 @@ class CitasController extends Controller
             abort(403, 'Acceso Prohibido');
 
         $citas = Cita::paginate(50);
-        return view('citas.index', ['citas'=>$citas]);
+        $users = User::all();
+        $especialidades = Especialidad::all();
+        return view('citas.index', ['citas'=>$citas, 'users'=>$users, 'especialidades'=>$especialidades]);
     }
 
     /**
