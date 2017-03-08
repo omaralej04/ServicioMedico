@@ -31,7 +31,7 @@
                                         I.D. #{{$cita->id}}
                                     </div>
                                     <div class="card-block">
-                                        <h5 class="card-title">{{$cita->user->nombre.' '.$cita->user->apellido}}</h5>
+                                        {{--<h5 class="card-title">{{$cita->user->nombre.' '.$cita->user->apellido}}</h5>--}}
                                         <h6>
                                             {{$cita->especialidad->nombre}}
                                         </h6>

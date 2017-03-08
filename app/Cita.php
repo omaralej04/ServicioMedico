@@ -16,10 +16,10 @@ class Cita extends Model
     ];
 
     public function user(){
-        return $this->hasMany('App\User');
+        return $this->hasMany('App\User', 'cita_id');
     }
 
     public function especialidad(){
-        return $this->hasMany('App\Especialidad');
+        return $this->hasMany('App\Especialidad', 'cita_id');
     }
 }

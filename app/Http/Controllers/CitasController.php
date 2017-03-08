@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Cita;
 use App\Especialidad;
 use App\User;
-use Validator;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
+use Validator;
+use Auth;
 
 class CitasController extends Controller
 {
@@ -16,6 +18,11 @@ class CitasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         if(!Auth::user()->can('ReadCitas'))
@@ -49,11 +56,11 @@ class CitasController extends Controller
     public function store(Request $request)
     {
         $v = Validator::make($request->all(), [
+            'user_id' => 'required',
+            'especialidad_id' => 'required',
             'fecha_cita' => 'required',
             'hora' => 'required',
-            'observaciones' => 'required',
-            'user_id' => 'required',
-            'especialidad_id' => 'required'
+            'observaciones' => 'max:255',
         ]);
 
         if ($v->fails()){
@@ -63,12 +70,12 @@ class CitasController extends Controller
         try {
             \DB::beginTransaction();
 
-            $citas = Cita::create([
+            $cita = Cita::create([
+                'user_id' => $request->input('user_id'),
+                'especialidad_id' => $request->input('especialidad_id'),
                'fecha_cita' => $request->input('fecha_cita'),
                 'hora' => $request->input('hora'),
                 'observaciones' => $request->input('observaciones'),
-                'user_id' => $request->input('user_id'),
-                'especialidad_id' => $request->input('especialidad_id')
             ]);
         }catch (\Exception $e) {
             \DB::rollback();
@@ -117,11 +124,11 @@ class CitasController extends Controller
     public function update(Request $request, $id)
     {
         $v = Validator::make($request->all(), [
+            'user_id' => 'required',
+            'especialidad_id' => 'required',
             'fecha_cita' => 'required',
             'hora' => 'required',
             'observaciones' => 'required',
-            'user_id' => 'required',
-            'especialidad_id' => 'required'
         ]);
 
         if ($v->fails()){
@@ -133,11 +140,11 @@ class CitasController extends Controller
 
             $cita = Cita::findOrFail($id);
             $cita->update([
-            'fecha_cita' => $request->input('fecha_cita'),
-            'hora' => $request->input('hora'),
-            'observaciones' => $request->input('observaciones'),
-            'user_id' => $request->input('user_id'),
-            'especialidad_id' => $request->input('especialidad_id')
+                'user_id' => $request->input('user_id'),
+                'especialidad_id' => $request->input('especialidad_id'),
+                'fecha_cita' => $request->input('fecha_cita'),
+                'hora' => $request->input('hora'),
+                'observaciones' => $request->input('observaciones'),
             ]);
 
         }catch (\Exception $e){
