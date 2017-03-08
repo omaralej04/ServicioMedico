@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Cita;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CitasController extends Controller
 {
@@ -13,7 +15,11 @@ class CitasController extends Controller
      */
     public function index()
     {
-        //
+        if(!Auth::user()->can('ReadCitas'))
+            abort(403, 'Acceso Prohibido');
+
+        $citas = Cita::paginate(50);
+        return view('citas.index', ['citas'=>$citas]);
     }
 
     /**
@@ -23,7 +29,7 @@ class CitasController extends Controller
      */
     public function create()
     {
-        //
+        if (!Auth::user()->can('CreateCitas');
     }
 
     /**

@@ -25,7 +25,7 @@ class PermissionsController extends Controller
         if(!Auth::user()->can('ReadPermisos'))
             abort(403,'Acceso Prohibido');
 
-        $permisos = Permission::paginate(90);
+        $permisos = Permission::paginate(50);
         return view('permisos.index', ['permisos' => $permisos]);
     }
 
