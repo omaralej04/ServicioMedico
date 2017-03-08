@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Cita;
+use App\Especialidad;
+use App\User;
+use Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,7 +32,12 @@ class CitasController extends Controller
      */
     public function create()
     {
-        if (!Auth::user()->can('CreateCitas');
+        if (!Auth::user()->can('CreateCitas'))
+            abort(403, 'Acceso Prohibido');
+
+        $users = User::role('Paciente')->get();
+        $especialidades = Especialidad::all();
+        return view('citas.create', ['users'=>$users, 'especialidades' => $especialidades]);
     }
 
     /**
@@ -40,7 +48,35 @@ class CitasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $v = Validator::make($request->all(), [
+            'fecha_cita' => 'required',
+            'hora' => 'required',
+            'observaciones' => 'required',
+            'user_id' => 'required',
+            'especialidad_id' => 'required'
+        ]);
+
+        if ($v->fails()){
+            return redirect()->back()->withErrors($v)->withInput();
+        }
+
+        try {
+            \DB::beginTransaction();
+
+            $citas = Cita::create([
+               'fecha_cita' => $request->input('fecha_cita'),
+                'hora' => $request->input('hora'),
+                'observaciones' => $request->input('observaciones'),
+                'user_id' => $request->input('user_id'),
+                'especialidad_id' => $request->input('especialidad_id')
+            ]);
+        }catch (\Exception $e) {
+            \DB::rollback();
+        }finally {
+            \DB::commit();
+        }
+
+        return redirect('/citas')->with('mensaje', 'Cita Creada');
     }
 
     /**
@@ -62,7 +98,13 @@ class CitasController extends Controller
      */
     public function edit($id)
     {
-        //
+        if (!Auth::user()->can('UpdateCitas'))
+            abort(403, 'Acceso Prohibido');
+
+        $cita = Cita::findOrFail($id);
+        $users = User::role('Paciente')->get();
+        $especialidades = Especialidad::all();
+        return view('citas.edit', ['cita'=>$cita, 'users'=>$users, 'especialidades'=>$especialidades]);
     }
 
     /**
@@ -74,7 +116,36 @@ class CitasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $v = Validator::make($request->all(), [
+            'fecha_cita' => 'required',
+            'hora' => 'required',
+            'observaciones' => 'required',
+            'user_id' => 'required',
+            'especialidad_id' => 'required'
+        ]);
+
+        if ($v->fails()){
+            return redirect()->back()->withErrors($v)->withInput();
+        }
+
+        try{
+            \DB::beginTransaction();
+
+            $cita = Cita::findOrFail($id);
+            $cita->update([
+            'fecha_cita' => $request->input('fecha_cita'),
+            'hora' => $request->input('hora'),
+            'observaciones' => $request->input('observaciones'),
+            'user_id' => $request->input('user_id'),
+            'especialidad_id' => $request->input('especialidad_id')
+            ]);
+
+        }catch (\Exception $e){
+            \DB::rollback();
+        }finally{
+            \DB::commit();
+        }
+        return redirect('/citas')->with('mensaje', 'Cita Creada');
     }
 
     /**
@@ -85,6 +156,17 @@ class CitasController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if(!Auth::user()->can('DeleteCitas'))
+            abort(403,'Acceso Prohibido');
+
+        try{
+            \DB::beginTransaction();
+            Cita::destroy($id);
+        }catch (\Exception $e){
+            \DB::rollback();
+        }finally{
+            \DB::commit();
+        }
+        return redirect('/citas')->with('mensaje', 'Cita Eliminada');
     }
 }
