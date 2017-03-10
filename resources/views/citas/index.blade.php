@@ -31,9 +31,14 @@
                                         I.D. #{{$cita->id}}
                                     </div>
                                     <div class="card-block">
-                                        <h5 class="card-title">{{$cita->user->nombre.' '.$cita->user->apellido}}</h5>
+                                        <h5 class="card-title"> @foreach($cita->user as $citau)
+                                                {{$citau->nombre . ' ' . $citau->apellido}}
+                                            @endforeach
+                                        </h5>
                                         <h6>
-                                            {{$cita->especialidad->nombre}}
+                                            @foreach($cita->especialidad as $citae)
+                                                {{$citae->nombre}}
+                                            @endforeach
                                         </h6>
                                         <h6>
                                             Fecha: {{$cita->fecha_cita.' '.$cita->hora}}

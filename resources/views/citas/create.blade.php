@@ -10,14 +10,6 @@
                             {{ csrf_field() }}
                             {{ method_field('POST') }}
 
-                            {{--$table->integer('user_id')->unsigned();--}}
-                            {{--$table->foreign('user_id')->references('id')->on('users');--}}
-                            {{--$table->integer('especialidad_id')->unsigned();--}}
-                            {{--$table->foreign('especialidad_id')->references('id')->on('especialidads');--}}
-                            {{--$table->date('fecha_cita');--}}
-                            {{--$table->string('hora');--}}
-                            {{--$table->text('observaciones');--}}
-
                             <div class="form-group{{ $errors->has('fecha_cita') ? ' has-error' : '' }}">
                                 <label for="fecha_cita" class="col-md-4 control-label">Fecha (DD/MM)</label>
 

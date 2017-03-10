@@ -73,12 +73,16 @@ class CitasController extends Controller
             \DB::beginTransaction();
 
             $cita = Cita::create([
-                'user_id' => $request->input('user_id'),
                 'especialidad_id' => $request->input('especialidad_id'),
                'fecha_cita' => $request->input('fecha_cita'),
                 'hora' => $request->input('hora'),
                 'observaciones' => $request->input('observaciones'),
             ]);
+            $user = User::findOrFail($request->input('user_id'));
+            $user->update([
+                'user_id' => $request->input('user_id'),
+            ]);
+
         }catch (\Exception $e) {
             \DB::rollback();
         }finally {

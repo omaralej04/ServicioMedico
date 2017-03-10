@@ -15,9 +15,16 @@ class CreateCitasTable extends Migration
     {
         Schema::create('citas', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('paciente_id')->unsigned();
+            $table->foreign('paciente_id')->references('id')->on('users');
+            $table->integer('especialidad_id')->unsigned();
+            $table->foreign('especialidad_id')->references('id')->on('especialidads');
+            $table->integer('medico_id')->unsigned();
+            $table->foreign('medico_id')->references('id')->on('users');
             $table->string('fecha_cita');
             $table->string('hora');
             $table->text('observaciones');
+            $table->enum('status', ['activa', 'inactiva', 'cancelada']);
             $table->timestamps();
         });
     }

@@ -15,11 +15,15 @@ class Cita extends Model
         'fecha_cita', 'hora', 'observaciones'
     ];
 
-    public function user(){
-        return $this->hasMany('App\User', 'cita_id');
+    public function userpaciente(){
+        return $this->belongsTo('App\User', 'paciente_id');
     }
 
     public function especialidad(){
-        return $this->hasMany('App\Especialidad', 'cita_id');
+        return $this->hasOne('App\Especialidad', 'especialidad_id');
+    }
+
+    public function usermedico(){
+        return $this->belongsTo('App\User', 'medico_id');
     }
 }

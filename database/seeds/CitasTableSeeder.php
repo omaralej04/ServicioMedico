@@ -12,9 +12,13 @@ class CitasTableSeeder extends Seeder
     public function run()
     {
         DB::table('citas')->insert([
+            'paciente_id' => '12',
+            'especialidad_id' => '2',
+            'medico_id' => '3',
             'fecha_cita' => '18/04',
-            'hora' => '12:30 AM',
+            'hora' => '01:15 PM',
             'observaciones' => 'Cita Por Default',
+            'status' => 'activa',
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now()
         ]);

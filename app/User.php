@@ -35,6 +35,7 @@ class User extends Authenticatable
     }
 
     public function cita() {
-        return $this->belongsToMany('App\Cita');
+        return $this->hasMany('App\Cita');
     }
 }
+
