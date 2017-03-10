@@ -29,9 +29,7 @@ class CitasController extends Controller
             abort(403, 'Acceso Prohibido');
 
         $citas = Cita::paginate(50);
-        $users = User::all();
-        $especialidades = Especialidad::all();
-        return view('citas.index', ['citas'=>$citas, 'users'=>$users, 'especialidades'=>$especialidades]);
+        return view('citas.index', ['citas'=>$citas]);
     }
 
     /**
@@ -43,10 +41,10 @@ class CitasController extends Controller
     {
         if (!Auth::user()->can('CreateCitas'))
             abort(403, 'Acceso Prohibido');
-
-        $users = User::role('Paciente')->get();
+        $pacientes = User::role('paciente')->get();
+        $medicos = User::role('medico')->get();
         $especialidades = Especialidad::all();
-        return view('citas.create', ['users'=>$users, 'especialidades' => $especialidades]);
+        return view('citas.create', ['pacientes'=>$pacientes, 'especialidades' => $especialidades, 'medicos'=>$medicos]);
     }
 
     /**
@@ -58,8 +56,10 @@ class CitasController extends Controller
     public function store(Request $request)
     {
         $v = Validator::make($request->all(), [
-            'user_id' => 'required',
+            'paciente_id' => 'required',
+            'medico_id' => 'required',
             'especialidad_id' => 'required',
+            'status' => 'required',
             'fecha_cita' => 'required',
             'hora' => 'required',
             'observaciones' => 'max:255',
@@ -74,13 +74,12 @@ class CitasController extends Controller
 
             $cita = Cita::create([
                 'especialidad_id' => $request->input('especialidad_id'),
-               'fecha_cita' => $request->input('fecha_cita'),
+                'paciente_id' => $request->input('paciente_id'),
+                'medico_id' => $request->input('medico_id'),
+                'status' => $request->input('status'),
+                'fecha_cita' => $request->input('fecha_cita'),
                 'hora' => $request->input('hora'),
                 'observaciones' => $request->input('observaciones'),
-            ]);
-            $user = User::findOrFail($request->input('user_id'));
-            $user->update([
-                'user_id' => $request->input('user_id'),
             ]);
 
         }catch (\Exception $e) {
@@ -114,10 +113,11 @@ class CitasController extends Controller
         if (!Auth::user()->can('UpdateCitas'))
             abort(403, 'Acceso Prohibido');
 
-        $cita = Cita::findOrFail($id);
-        $users = User::role('Paciente')->get();
+        $pacientes = User::role('paciente')->get();
+        $medicos = User::role('medico')->get();
         $especialidades = Especialidad::all();
-        return view('citas.edit', ['cita'=>$cita, 'users'=>$users, 'especialidades'=>$especialidades]);
+        $cita = Cita::findOrFail($id);
+        return view('citas.edit', ['cita'=>$cita, 'pacientes'=>$pacientes, 'especialidades' => $especialidades, 'medicos'=>$medicos]);
     }
 
     /**
@@ -130,11 +130,13 @@ class CitasController extends Controller
     public function update(Request $request, $id)
     {
         $v = Validator::make($request->all(), [
-            'user_id' => 'required',
             'especialidad_id' => 'required',
+            'paciente_id' => 'required',
+            'medico_id' => 'required',
+            'status' => 'required',
             'fecha_cita' => 'required',
             'hora' => 'required',
-            'observaciones' => 'required',
+            'observaciones' => 'max:255',
         ]);
 
         if ($v->fails()){
@@ -146,8 +148,10 @@ class CitasController extends Controller
 
             $cita = Cita::findOrFail($id);
             $cita->update([
-                'user_id' => $request->input('user_id'),
                 'especialidad_id' => $request->input('especialidad_id'),
+                'paciente_id' => $request->input('paciente_id'),
+                'medico_id' => $request->input('medico_id'),
+                'status' => $request->input('status'),
                 'fecha_cita' => $request->input('fecha_cita'),
                 'hora' => $request->input('hora'),
                 'observaciones' => $request->input('observaciones'),

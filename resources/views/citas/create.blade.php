@@ -52,20 +52,39 @@
                                 </div>
                             </div>
 
-                            <div class="form-group{{ $errors->has('user_id') ? ' has-error' : '' }}">
-                                <label for="user_id" class="col-md-4 control-label">Usuario</label>
+                            <div class="form-group{{ $errors->has('medico_id') ? ' has-error' : '' }}">
+                                <label for="medico_id" class="col-md-4 control-label">Medico</label>
 
                                 <div class="col-md-6">
-                                    <select name="user_id" id="user_id" class="form-control">
+                                    <select name="medico_id" id="medico_id" class="form-control">
                                         <option value="">Seleccione</option>
-                                        @foreach($users as $user)
-                                            <option value="{{$user->id}}">{{$user->nombre.' '.$user->apellido}}</option>
+                                        @foreach($medicos as $medico)
+                                            <option value="{{$medico->id}}">{{$medico->nombre.' '.$medico->apellido}}</option>
                                         @endforeach
                                     </select>
 
-                                    @if ($errors->has('user_id'))
+                                    @if ($errors->has('medico_id'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('user_id') }}</strong>
+                                        <strong>{{ $errors->first('medico_id') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('paciente_id') ? ' has-error' : '' }}">
+                                <label for="paciente_id" class="col-md-4 control-label">Paciente</label>
+
+                                <div class="col-md-6">
+                                    <select name="paciente_id" id="paciente_id" class="form-control">
+                                        <option value="">Seleccione</option>
+                                        @foreach($pacientes as $paciente)
+                                            <option value="{{$paciente->id}}">{{$paciente->nombre.' '.$paciente->apellido}}</option>
+                                        @endforeach
+                                    </select>
+
+                                    @if ($errors->has('paciente_id'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('paciente_id') }}</strong>
                                     </span>
                                     @endif
                                 </div>
@@ -85,6 +104,25 @@
                                     @if ($errors->has('especialidad_id'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('especialidad_id') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
+                                <label for="status" class="col-md-4 control-label">Status</label>
+
+                                <div class="col-md-6">
+                                    <select name="status" id="status" class="form-control">
+                                        <option value="">Seleccione</option>
+                                        <option value="activa">Activa</option>
+                                        <option value="inactiva">Inactiva</option>
+                                        <option value="cancelada">Cancelada</option>
+                                    </select>
+
+                                    @if ($errors->has('status'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('status') }}</strong>
                                     </span>
                                     @endif
                                 </div>

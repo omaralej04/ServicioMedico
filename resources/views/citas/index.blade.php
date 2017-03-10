@@ -22,7 +22,6 @@
                         @endif
                         <br>
                     </div>
-
                     <div class="panel-body">
                     @foreach($citas as $cita)
                             <div class="col-sm-4">
@@ -31,14 +30,12 @@
                                         I.D. #{{$cita->id}}
                                     </div>
                                     <div class="card-block">
-                                        <h5 class="card-title"> @foreach($cita->user as $citau)
-                                                {{$citau->nombre . ' ' . $citau->apellido}}
-                                            @endforeach
+                                        <h5 class="card-title">
+                                            {{$cita->userpaciente->nombre.' '.$cita->userpaciente->apellido}}
                                         </h5>
-                                        <h6>
-                                            @foreach($cita->especialidad as $citae)
-                                                {{$citae->nombre}}
-                                            @endforeach
+                                        <h6>Medico: {{$cita->usermedico->nombre.' '.$cita->usermedico->apellido}}
+                                            <br>
+                                            {{$cita->especialidad->nombre}}
                                         </h6>
                                         <h6>
                                             Fecha: {{$cita->fecha_cita.' '.$cita->hora}}

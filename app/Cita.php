@@ -12,7 +12,7 @@ class Cita extends Model
     use Notifiable;
 
     protected $fillable = [
-        'fecha_cita', 'hora', 'observaciones'
+        'fecha_cita', 'hora', 'observaciones', 'paciente_id', 'especialidad_id', 'medico_id', 'status'
     ];
 
     public function userpaciente(){
@@ -20,7 +20,7 @@ class Cita extends Model
     }
 
     public function especialidad(){
-        return $this->hasOne('App\Especialidad', 'especialidad_id');
+        return $this->belongsTo('App\Especialidad', 'especialidad_id');
     }
 
     public function usermedico(){

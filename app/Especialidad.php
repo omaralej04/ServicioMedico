@@ -20,6 +20,6 @@ class Especialidad extends Model
     }
 
     public function cita() {
-        return $this->belongsToMany('App\Cita');
+        return $this->hasMany('App\Cita');
     }
 }
