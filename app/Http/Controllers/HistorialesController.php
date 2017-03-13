@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Cita;
+use App\Especialidad;
 use App\Historial;
 use App\User;
 use Validator;
@@ -24,27 +26,16 @@ class HistorialesController extends Controller
         return view('users.historias', ['user' => $user, 'historias'=>$historias]);
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function historiaCreate($id)
     {
-        //
-    }
+        $user = User::findOrFail($id);
+        $medicos = User::role('Medico')->paginate(30);
+        $especialidades = Especialidad::all();
+        $citas = Cita::where([
+            ['paciente_id', '=', $id], ['status', '=', 'activa'],
+        ])->get();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $roles = Role::all();
-        $users = User::role('Paciente');
-        $medicos = User::role('Medico');
-        return view('users.historiascreate', ['roles'=>$roles]);
+        return view('users.historiascreate', ['user'=>$user, 'medicos'=>$medicos, 'especialidades'=>$especialidades, 'citas'=>$citas]);
     }
 
     /**
@@ -56,18 +47,13 @@ class HistorialesController extends Controller
     public function store(Request $request)
     {
         $v = Validator::make($request->all(), [
-            'nombre' => 'required|max:255',
-            'apellido' => 'required|max:255',
-            'cedula' => 'required|max:10|unique:users',
-            'fecha_nacimiento' => 'required|max:32',
-            'sexo' => 'required',
-            'direccion' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'telefono' => 'max:255',
-            'celular' => 'max:255',
-            'especialidad' => 'max:255',
-            'password' => 'required|min:6|confirmed',
-            'role' => 'required'
+            'paciente_id' => 'required',
+            'especialidad_id' => 'required',
+            'medico_id' => 'required',
+            'cita_id' => 'required',
+            'informe' => 'required',
+            'receta' => 'required',
+            'observaciones' => 'required',
         ]);
 
         if ($v->fails()){
@@ -77,20 +63,21 @@ class HistorialesController extends Controller
         try {
             \DB::beginTransaction();
 
-            $user = User::create([
-                'nombre' => $request->input('nombre'),
-                'apellido' => $request->input('apellido'),
-                'cedula' => $request->input('cedula'),
-                'fecha_nacimiento' => $request->input('fecha_nacimiento'),
-                'sexo' => $request->input('sexo'),
-                'direccion' => $request->input('direccion'),
-                'email' => $request->input('email'),
-                'telefono' => $request->input('telefono'),
-                'celular' => $request->input('celular'),
-                'especialidad' => $request->input('especialidad'),
-                'password' => bcrypt($request->input('password')),
+            $historia = Historial::create([
+                'paciente_id' => $request->input('paciente_id'),
+                'especialidad_id' => $request->input('especialidad_id'),
+                'medico_id' => $request->input('medico_id'),
+                'cita_id' => $request->input('cita_id'),
+                'informe' => $request->input('informe'),
+                'receta' => $request->input('receta'),
+                'observaciones' => $request->input('observaciones'),
             ]);
-            $user->assignRole($request->input('role'));
+
+            $cita = Cita::findOrFail($request->input('cita_id'));
+            $cita->update([
+                'status' => 'inactiva'
+            ]);
+
         }catch (\Exception $e) {
             \DB::rollback();
         }finally {
@@ -98,17 +85,6 @@ class HistorialesController extends Controller
         }
 
         return redirect('/users')->with('mensaje', 'Usuario Creado');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**

@@ -21,9 +21,9 @@ Route::get('/home', 'HomeController@index');
 
 Route::resource('/users', 'UsersController');
 
-Route::resource('/historias', 'HistorialesController');
-
 Route::get('/users/{id}/historias', 'HistorialesController@userHistoria');
+Route::get('/users/{id}/historias/create', 'HistorialesController@historiaCreate');
+Route::post('/users/{id}/historias', 'HistorialesController@store');
 
 
 Route::resource('/medicos', 'MedicosController');
@@ -33,4 +33,6 @@ Route::resource('/medicinas', 'MedicinasController');
 Route::resource('/roles', 'RolesController');
 Route::resource('/permisos', 'PermissionsController');
 Route::resource('/especialidades', 'EspecialidadesController');
+
 Route::resource('/citas', 'CitasController');
+Route::get('/citasinac', 'CitasController@indexinac');

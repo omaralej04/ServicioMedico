@@ -20,7 +20,7 @@
                             <i class="fa fa-calendar-plus-o"></i> Nueva Cita
                         </a>
                         @endif
-                        <a href="{{ url('/citas/inactivas') }}" class="btn btn-inverse btn-block">
+                        <a href="{{ url('/citasinac') }}" class="btn btn-inverse btn-block">
                             <i class="fa fa-calendar-minus-o"></i> Citas Inactivas
                         </a>
                         <br>

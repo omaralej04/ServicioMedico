@@ -32,12 +32,6 @@ class CitasController extends Controller
         return view('citas.index', ['citas'=>$citas]);
     }
 
-    public function indexInactivo()
-    {
-        $citas = Cita::where('status', '=', 'inactiva')->paginate(90);
-        return view('citas.indexinac', ['citas'=>$citas]);
-    }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -191,5 +185,11 @@ class CitasController extends Controller
             \DB::commit();
         }
         return redirect('/citas')->with('mensaje', 'Cita Eliminada');
+    }
+
+    public function indexinac()
+    {
+        $citas = Cita::where('status', '=', 'inactiva')->paginate(90);
+        return view('citas.indexinac', ['citas'=>$citas]);
     }
 }

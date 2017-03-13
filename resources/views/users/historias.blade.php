@@ -12,7 +12,7 @@
                             <i class="fa  fa-arrow-left"></i> Regresar
                         </a>
                         {{--@if(Auth::user()->roles[0]->hasPermissionTo('CreateUsers') or Auth::user()->can('CreateUsers'))--}}
-                        <a href="{{ url('/users/create') }}" class="btn btn-success btn-block">
+                        <a href="{{ url('/users/'.$user->id.'/historias/create') }}" class="btn btn-success btn-block">
                             <i class="fa fa-archive"></i> Nueva Entrada
                         </a>
                         {{--@else--}}
@@ -20,11 +20,10 @@
                         {{--<i class="fa fa-user"></i> Nuevo Usuario--}}
                         {{--</a>--}}
                         {{--@endif--}}
-                        {{--<br>--}}
+                        <br>
                     </div>
 
                     <div class="panel-body">
-
                         @foreach($historias as $historia)
                             <div class="col-md-8 col-md-offset-2">
                                 <div class="card text-center">
@@ -85,62 +84,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                    @endforeach
-
-                                    {{--@foreach($historias as $historia)--}}
-                                    {{--<div class="col-sm-4">--}}
-                                    {{--<div class="card text-center">--}}
-                                    {{--<div class="card-header">--}}
-                                    {{--I.D. #{{$historia->id}}--}}
-                                    {{--</div>--}}
-                                    {{--<div class="card-block">--}}
-                                    {{--<h5 class="card-title">{{$historia->especialidad->nombre}}</h5>--}}
-                                    {{--<h6>--}}
-                                    {{--Medico: {{$historia->usermedico->nombre.' '.$historia->usermedico->apellido}}--}}
-                                    {{--</h6>--}}
-                                    {{--<h6>Cita: {{$historia->cita->fecha_cita.' '.$historia->cita->hora}}</h6>--}}
-                                    {{--</div>--}}
-                                    {{--<div class="card-footer">--}}
-                                    {{--<div class="row">--}}
-                                    {{--<div class="col-sm-6">--}}
-                                    {{--@if(Auth::user()->roles[0]->hasPermissionTo('UpdateUsers') or Auth::user()->can('UpdateUsers'))--}}
-                                    {{--<a href="{{ url('users/'.$user->id.'/edit') }}"--}}
-                                    {{--class="btn btn-primary">--}}
-                                    {{--<i class="fa fa-edit"></i>--}}
-                                    {{--</a>--}}
-                                    {{--@else--}}
-                                    {{--<a href="{{ url('users/'.$user->id.'/edit') }}"--}}
-                                    {{--class="btn btn-primary disabled" disabled="">--}}
-                                    {{--<i class="fa fa-edit"></i>--}}
-                                    {{--</a>--}}
-                                    {{--@endif--}}
-                                    {{--</div>--}}
-                                    {{--<div class="col-sm-6">--}}
-                                    {{--@if(Auth::user()->roles[0]->hasPermissionTo('DeleteUsers') or Auth::user()->can('DeleteUsers'))--}}
-                                    {{--<form method="POST" action="/users/{{ $user->id }}">--}}
-                                    {{--<input type="hidden" name="_token" value="{{ csrf_token() }}">--}}
-                                    {{--<input type="hidden" name="_method" value="DELETE"/>--}}
-                                    {{--<button type="submit" class="btn btn-danger">--}}
-                                    {{--<i class="fa fa-close"></i>--}}
-                                    {{--</button>--}}
-                                    {{--</form>--}}
-                                    {{--@else--}}
-                                    {{--<form method="POST" action="/users/{{ $user->id }}">--}}
-                                    {{--<input type="hidden" name="_token" value="{{ csrf_token() }}">--}}
-                                    {{--<input type="hidden" name="_method" value="DELETE"/>--}}
-                                    {{--<button type="submit" class="btn btn-danger disabled" disabled>--}}
-                                    {{--<i class="fa fa-close"></i>--}}
-                                    {{--</button>--}}
-                                    {{--</form>--}}
-                                    {{--@endif--}}
-                                    {{--</div>--}}
-                                    {{--</div>--}}
-                                    {{--</div>--}}
-                                    {{--</div>--}}
-                                    {{--</div>--}}
-                                    {{--@endforeach--}}
                                 </div>
                             </div>
+                            <br>
+                        @endforeach
                     </div>
                 </div>
             </div>
