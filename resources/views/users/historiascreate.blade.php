@@ -6,7 +6,8 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Nueva Consulta</div>
                     <div class="panel-body">
-                        <form class="form-horizontal" role="form" method="POST" action="{{ url('/users/'.$user->id.'/historias') }}">
+                        <form class="form-horizontal" role="form" method="POST"
+                              action="{{ url('/users/'.$user->id.'/historias') }}">
                             {{ csrf_field() }}
                             {{ method_field('POST') }}
 
@@ -87,7 +88,8 @@
                                 <label for="informe" class="col-md-4 control-label">Informe</label>
 
                                 <div class="col-md-6">
-                                    <textarea id="informe" class="form-control" name="informe" required style="resize: none">
+                                    <textarea id="informe" class="form-control" name="informe" required
+                                              style="resize: none">
 
                                     </textarea>
                                     @if ($errors->has('informe'))
@@ -99,17 +101,44 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('receta') ? ' has-error' : '' }}">
-                                <label for="receta" class="col-md-4 control-label">Receta</label>
-
+                                <label for="receta" class="col-md-4 control-label">Receta </label>
                                 <div class="col-md-6">
-                                    <textarea id="receta" class="form-control" name="receta" required style="resize: none">
+                                    <select name="receta" id="receta" class="form-control">
+                                        <option value="">Seleccione</option>
+                                    @foreach($medicinas as $medicina)
+                                            <option value="{{ $medicina->nombre }}">
+                                                {{ $medicina->nombre }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    </div>
+                                </div>
 
-                                    </textarea>
-                                    @if ($errors->has('receta'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('receta') }}</strong>
-                                    </span>
-                                    @endif
+                            <div class="form-group">
+                                <label for="receta2" class="col-md-4 control-label">Receta 2</label>
+                                <div class="col-md-6">
+                                    <select name="receta2" id="receta2" class="form-control">
+                                        <option value="">Seleccione</option>
+                                        @foreach($medicinas as $medicina)
+                                            <option value="{{ $medicina->nombre }}">
+                                                {{ $medicina->nombre }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                </div>
+
+                            <div class="form-group">
+                                <label for="receta3" class="col-md-4 control-label">Receta 3</label>
+                                <div class="col-md-6">
+                                    <select name="receta3" id="receta3" class="form-control">
+                                        <option value="">Seleccione</option>
+                                        @foreach($medicinas as $medicina)
+                                            <option value="{{ $medicina->nombre }}">
+                                                {{ $medicina->nombre }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
 
@@ -117,7 +146,8 @@
                                 <label for="observaciones" class="col-md-4 control-label">Observaciones</label>
 
                                 <div class="col-md-6">
-                                    <textarea id="observaciones" class="form-control" name="observaciones" required style="resize: none">
+                                    <textarea id="observaciones" class="form-control" name="observaciones" required
+                                              style="resize: none">
 
                                     </textarea>
                                     @if ($errors->has('observaciones'))

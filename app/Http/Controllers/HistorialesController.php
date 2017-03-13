@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Cita;
 use App\Especialidad;
 use App\Historial;
+use App\Medicina;
 use App\User;
 use Validator;
 use Illuminate\Http\Request;
@@ -31,11 +32,13 @@ class HistorialesController extends Controller
         $user = User::findOrFail($id);
         $medicos = User::role('Medico')->paginate(30);
         $especialidades = Especialidad::all();
+        $medicinas = Medicina::all();
         $citas = Cita::where([
             ['paciente_id', '=', $id], ['status', '=', 'activa'],
         ])->get();
 
-        return view('users.historiascreate', ['user'=>$user, 'medicos'=>$medicos, 'especialidades'=>$especialidades, 'citas'=>$citas]);
+        return view('users.historiascreate', ['user'=>$user, 'medicos'=>$medicos, 'especialidades'=>$especialidades,
+            'citas'=>$citas, 'medicinas'=>$medicinas]);
     }
 
     /**
@@ -52,7 +55,7 @@ class HistorialesController extends Controller
             'medico_id' => 'required',
             'cita_id' => 'required',
             'informe' => 'required',
-            'receta' => 'required',
+            'receta' => 'max:955',
             'observaciones' => 'required',
         ]);
 
@@ -69,7 +72,7 @@ class HistorialesController extends Controller
                 'medico_id' => $request->input('medico_id'),
                 'cita_id' => $request->input('cita_id'),
                 'informe' => $request->input('informe'),
-                'receta' => $request->input('receta'),
+                'receta' => $request->input('receta').','.$request->input('receta2').','.$request->input('receta3'),
                 'observaciones' => $request->input('observaciones'),
             ]);
 
