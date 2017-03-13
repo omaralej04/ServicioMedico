@@ -8,7 +8,7 @@ class RecipesController extends Controller
 {
     public function ver_recipe()
     {
-        //todo 
+        //todo
     }
 
     /**

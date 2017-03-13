@@ -13,7 +13,16 @@ class CreateRecipesTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('recipes', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('consulta_id')->unsigned();
+            $table->foreign('consulta_id')->references('id')->on('historials');
+            $table->integer('medicina_id')->unsigned();
+            $table->foreign('medicina_id')->references('id')->on('medicinas');
+            $table->enum('status', ['entregado', 'pendiente']);
+            $table->text('descripcion');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +32,6 @@ class CreateRecipesTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('recipes');
     }
 }

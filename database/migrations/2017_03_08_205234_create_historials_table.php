@@ -24,7 +24,7 @@ class CreateHistorialsTable extends Migration
             $table->integer('cita_id')->unsigned();
             $table->foreign('cita_id')->references('id')->on('citas');
             $table->text('informe');
-            $table->text('receta');
+            $table->string('receta');
             $table->text('observaciones');
             $table->timestamps();
         });
