@@ -33,11 +33,11 @@
                                 <h3 class="card-title">Citas</h3>
                                 <h6>
                                     Ir al area que muestra todos tus Citas con sus datos.
-                                    <span class="text-muted">Tambien Puedes Pedir Citas!</span>
+                                    <span class="text-muted">Y informacion de su Status actual.</span>
                                 </h6>
                             </div>
                             <div class="card-footer">
-                                <a href="{{ url('404') }}"
+                                <a href="{{ url('miscitas') }}"
                                    class="btn btn-primary">
                                     <i class="fa fa-angle-double-right"></i>&#8195;Ir
                                 </a>

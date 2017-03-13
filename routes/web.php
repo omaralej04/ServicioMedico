@@ -20,6 +20,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 
 Route::resource('/users', 'UsersController');
+Route::get('/miscitas', 'UsersController@miscitasactivas');
+Route::get('/miscitasinac', 'UsersController@miscitasinac');
 
 Route::get('/users/{id}/historias', 'HistorialesController@userHistoria');
 Route::get('/users/{id}/historias/create', 'HistorialesController@historiaCreate');

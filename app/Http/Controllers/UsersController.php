@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Cita;
 use App\User;
 use Validator;
 use Illuminate\Http\Request;
@@ -204,5 +205,27 @@ class UsersController extends Controller
 
         User::destroy($id);
         return redirect('/users')->with('mensaje', 'Usuario Eliminado');
+    }
+
+    public function miscitasactivas()
+    {
+        $userId = Auth::id();
+        $user = \DB::table('users')->where('id', '=', $userId)->get();
+        $citas = Cita::where([
+            ['paciente_id', '=', $userId], ['status', '=', 'activa'],
+        ])->get();
+
+        return view('users.miscitas', ['user'=>$user, 'citas'=>$citas]);
+    }
+
+    public function miscitasinac()
+    {
+        $userId = Auth::id();
+        $user = \DB::table('users')->where('id', '=', $userId)->get();
+        $citas = Cita::where([
+           ['paciente_id', '=', $userId], ['status', '!=', 'activa'],
+        ])->get();
+
+        return view('users.miscitasinac', ['user'=>$user, 'citas'=>$citas]);
     }
 }

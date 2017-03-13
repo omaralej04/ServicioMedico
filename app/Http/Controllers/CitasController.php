@@ -189,7 +189,7 @@ class CitasController extends Controller
 
     public function indexinac()
     {
-        $citas = Cita::where('status', '=', 'inactiva')->paginate(90);
+        $citas = Cita::where('status', '!=', 'activa')->paginate(90);
         return view('citas.indexinac', ['citas'=>$citas]);
     }
 }
