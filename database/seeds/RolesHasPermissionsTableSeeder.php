@@ -192,6 +192,26 @@ class RolesHasPermissionsTableSeeder extends Seeder
             'permission_id' => 36,
         ]);
 
+        DB::table('role_has_permissions')->insert([
+            'role_id' => 1,
+            'permission_id' => 37,
+        ]);
+
+        DB::table('role_has_permissions')->insert([
+            'role_id' => 1,
+            'permission_id' => 38,
+        ]);
+
+        DB::table('role_has_permissions')->insert([
+            'role_id' => 1,
+            'permission_id' => 39,
+        ]);
+
+        DB::table('role_has_permissions')->insert([
+            'role_id' => 1,
+            'permission_id' => 40,
+        ]);
+
         //Medico Permissions
         DB::table('role_has_permissions')->insert([
             'role_id' => 2,
@@ -233,6 +253,21 @@ class RolesHasPermissionsTableSeeder extends Seeder
             'permission_id' => 34,
         ]);
 
+        DB::table('role_has_permissions')->insert([
+            'role_id' => 2,
+            'permission_id' => 37,
+        ]);
+
+        DB::table('role_has_permissions')->insert([
+            'role_id' => 2,
+            'permission_id' => 38,
+        ]);
+
+        DB::table('role_has_permissions')->insert([
+            'role_id' => 2,
+            'permission_id' => 39,
+        ]);
+
         //Farmaceuta Permissions
         DB::table('role_has_permissions')->insert([
             'role_id' => 3,
@@ -262,6 +297,21 @@ class RolesHasPermissionsTableSeeder extends Seeder
         DB::table('role_has_permissions')->insert([
             'role_id' => 3,
             'permission_id' => 19,
+        ]);
+
+        DB::table('role_has_permissions')->insert([
+            'role_id' => 3,
+            'permission_id' => 37,
+        ]);
+
+        DB::table('role_has_permissions')->insert([
+            'role_id' => 3,
+            'permission_id' => 38,
+        ]);
+
+        DB::table('role_has_permissions')->insert([
+            'role_id' => 3,
+            'permission_id' => 39,
         ]);
 
         //Secretarias
@@ -327,6 +377,21 @@ class RolesHasPermissionsTableSeeder extends Seeder
         DB::table('role_has_permissions')->insert([
             'role_id' => 4,
             'permission_id' => 35,
+        ]);
+
+        DB::table('role_has_permissions')->insert([
+            'role_id' => 4,
+            'permission_id' => 37,
+        ]);
+
+        DB::table('role_has_permissions')->insert([
+            'role_id' => 4,
+            'permission_id' => 38,
+        ]);
+
+        DB::table('role_has_permissions')->insert([
+            'role_id' => 4,
+            'permission_id' => 39,
         ]);
     }
 }

@@ -11,15 +11,15 @@
                         <a href="{{ url('/users') }}" class="btn btn-danger btn-block">
                             <i class="fa  fa-arrow-left"></i> Regresar
                         </a>
-                        {{--@if(Auth::user()->roles[0]->hasPermissionTo('CreateUsers') or Auth::user()->can('CreateUsers'))--}}
+                        @if(Auth::user()->roles[0]->hasPermissionTo('CreateHistorias') or Auth::user()->can('CreateHistorias'))
                         <a href="{{ url('/users/'.$user->id.'/historias/create') }}" class="btn btn-success btn-block">
                             <i class="fa fa-archive"></i> Nueva Entrada
                         </a>
-                        {{--@else--}}
-                        {{--<a href="{{ url('/users/create') }}" class="btn btn-success btn-block disabled" disabled="true">--}}
-                        {{--<i class="fa fa-user"></i> Nuevo Usuario--}}
-                        {{--</a>--}}
-                        {{--@endif--}}
+                        @else
+                        <a href="{{ url('/users/create') }}" class="btn btn-success btn-block disabled" disabled="true">
+                        <i class="fa fa-user"></i> Nuevo Usuario
+                        </a>
+                        @endif
                         <br>
                     </div>
 
@@ -67,21 +67,23 @@
                                     </div>
                                     <div class="card-footer text-muted">
                                         <div class="row">
-                                            <div class="col-sm-6">
-                                                    <a href="{{ url('users/'.$user->id.'/historias/'.$historia->id.'/edit') }}"
-                                                       class="btn btn-primary">
-                                                        <i class="fa fa-edit"></i>
-                                                    </a>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                    <form method="POST" action="/users/{{ $user->id }}/historias/{{$historia->id}}">
-                                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                        <input type="hidden" name="_method" value="DELETE"/>
-                                                        <button type="submit" class="btn btn-danger">
-                                                            <i class="fa fa-close"></i>
-                                                        </button>
+                                    @if(Auth::user()->roles[0]->hasPermissionTo('DeleteHistorias') or Auth::user()->can('DeleteHistorias'))
+                                            <form method="POST" action="/historia/{{$historia->id}}">
+                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                <input type="hidden" name="_method" value="DELETE"/>
+                                                <button type="submit" class="btn btn-danger">
+                                                    <i class="fa fa-close"></i>
+                                                </button>
                                                     </form>
-                                            </div>
+                                        @else
+                                                <form method="POST" action="/historia/{{$historia->id}}">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                    <input type="hidden" name="_method" value="DELETE"/>
+                                                    <button type="submit" class="btn btn-danger" disabled>
+                                                        <i class="fa fa-close"></i>
+                                                    </button>
+                                                </form>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
