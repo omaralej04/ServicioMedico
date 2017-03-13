@@ -28,6 +28,7 @@ Route::get('/users/{id}/historias/create', 'HistorialesController@historiaCreate
 Route::post('/users/{id}/historias', 'HistorialesController@store');
 Route::delete('/historia/{id}', 'HistorialesController@destroy');
 
+Route::get('/historia/{id}/recipe', 'RecipesController@ver_recipe');
 
 Route::resource('/medicos', 'MedicosController');
 Route::resource('/farmaceutas', 'FarmaceutasController');

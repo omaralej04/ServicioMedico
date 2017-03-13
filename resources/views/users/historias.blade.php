@@ -67,7 +67,8 @@
                                     </div>
                                     <div class="card-footer text-muted">
                                         <div class="row">
-                                    @if(Auth::user()->roles[0]->hasPermissionTo('DeleteHistorias') or Auth::user()->can('DeleteHistorias'))
+                                            <div class="col-sm-6">
+                                            @if(Auth::user()->roles[0]->hasPermissionTo('DeleteHistorias') or Auth::user()->can('DeleteHistorias'))
                                             <form method="POST" action="/historia/{{$historia->id}}">
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                 <input type="hidden" name="_method" value="DELETE"/>
@@ -84,6 +85,13 @@
                                                     </button>
                                                 </form>
                                             @endif
+                                                </div>
+                                            <div class="col-sm-6">
+                                                <div class="col-sm-4">
+                                                    <a href="{{ url('historia/'.$historia->id.'/recipe') }}" class="btn btn-inverse btn-success">
+                                                        <i class="fa fa-book"></i>
+                                                    </a>
+                                                </div>
                                         </div>
                                     </div>
                                 </div>
