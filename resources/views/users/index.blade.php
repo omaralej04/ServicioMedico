@@ -58,7 +58,7 @@
                                                 @endif
                                             </div>
                                             <div class="col-sm-4">
-                                                <a href="{{ url('users/'.$user->id.'/historia') }}" class="btn btn-inverse btn-success disabled">
+                                                <a href="{{ url('users/'.$user->id.'/historias') }}" class="btn btn-inverse btn-success">
                                                     <i class="fa fa-stethoscope"></i>
                                                 </a>
                                             </div>

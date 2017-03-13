@@ -37,5 +37,9 @@ class User extends Authenticatable
     public function cita() {
         return $this->hasMany('App\Cita');
     }
+
+    public function historial(){
+        return $this->hasMany('App\Historial');
+    }
 }
 

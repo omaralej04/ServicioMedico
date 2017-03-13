@@ -20,9 +20,11 @@
                             <i class="fa fa-calendar-plus-o"></i> Nueva Cita
                         </a>
                         @endif
+                        <a href="{{ url('/citas') }}" class="btn btn-inverse btn-block">
+                            <i class="fa fa-calendar-minus-o"></i> Citas Activas
+                        </a>
                         <br>
                     </div>
-
                     <div class="panel-body">
                     @foreach($citas as $cita)
                             <div class="col-sm-4">
@@ -31,8 +33,11 @@
                                         I.D. #{{$cita->id}}
                                     </div>
                                     <div class="card-block">
-                                        {{--<h5 class="card-title">{{$cita->user->nombre.' '.$cita->user->apellido}}</h5>--}}
-                                        <h6>
+                                        <h5 class="card-title">
+                                            {{$cita->userpaciente->nombre.' '.$cita->userpaciente->apellido}}
+                                        </h5>
+                                        <h6>Medico: {{$cita->usermedico->nombre.' '.$cita->usermedico->apellido}}
+                                            <br>
                                             {{$cita->especialidad->nombre}}
                                         </h6>
                                         <h6>

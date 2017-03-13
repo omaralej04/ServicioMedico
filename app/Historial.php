@@ -27,6 +27,8 @@ class Historial extends Model
         return $this->belongsTo('App\User', 'medico_id');
     }
 
-    public function citas
+    public function cita(){
+        return $this->belongsTo('App\Cita', 'cita_id');
+    }
 
 }

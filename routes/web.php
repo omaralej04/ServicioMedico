@@ -20,6 +20,12 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 
 Route::resource('/users', 'UsersController');
+
+Route::resource('/historias', 'HistorialesController');
+
+Route::get('/users/{id}/historias', 'HistorialesController@userHistoria');
+
+
 Route::resource('/medicos', 'MedicosController');
 Route::resource('/farmaceutas', 'FarmaceutasController');
 Route::resource('/secretaria', 'SecretariaController');
