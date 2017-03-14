@@ -26,8 +26,15 @@ class FarmaceutasController extends Controller
         if(!Auth::user()->can('ReadFarmaceutas'))
             abort(403,'Acceso Prohibido');
 
-        $farmaceutas = User::role('Farmaceuta')->paginate();
-        return view('farmaceutas.index', ['farmaceutas' => $farmaceutas]);
+        $farmaceutas = null;
+        $buscar = \Request::get('buscar');
+        if ($buscar != ''){
+            $farmaceutas = User::role('Farmaceuta')->cedula($buscar)->paginate(1);
+        } else {
+            $farmaceutas = User::role('Farmaceuta')->paginate(12);
+        }
+
+        return view('farmaceutas.index', ['farmaceutas' => $farmaceutas, 'buscar'=>$buscar]);
     }
 
     /**

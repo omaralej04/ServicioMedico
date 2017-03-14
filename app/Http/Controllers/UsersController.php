@@ -27,8 +27,14 @@ class UsersController extends Controller
         if(!Auth::user()->can('ReadUsers'))
             abort(403,'Acceso Prohibido');
 
-        $users = User::role('Paciente')->paginate();
-        return view('users.index', ['users' => $users]);
+        $users = null;
+        $buscar = \Request::get('buscar');
+        if ($buscar != ''){
+            $users = User::role('Paciente')->cedula($buscar)->paginate(1);
+        } else{
+            $users = User::role('Paciente')->paginate(12);
+        }
+        return view('users.index', ['users' => $users, 'buscar'=>$buscar]);
     }
 
     /**

@@ -25,9 +25,14 @@ class SecretariaController extends Controller
     {
         if(!Auth::user()->can('ReadSecretarias'))
             abort(403,'Acceso Prohibido');
-
-        $secretarias = User::role('Secretaria')->paginate();
-        return view('secretarias.index', ['secretarias' => $secretarias]);
+        $secretarias = null;
+        $buscar = \Request::get('buscar');
+        if ($buscar != ''){
+            $secretarias = User::role('Secretaria')->cedula($buscar)->paginate(1);
+        } else{
+            $secretarias = User::role('Secretaria')->paginate(12);
+        }
+        return view('secretarias.index', ['secretarias' => $secretarias, 'buscar'=>$buscar]);
     }
 
     /**

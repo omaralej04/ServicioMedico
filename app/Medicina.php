@@ -14,4 +14,9 @@ class Medicina extends Model
     protected $fillable = [
         'nombre',
     ];
+
+    public function scopeNombre($query, $nombre)
+    {
+        return $query->where('nombre', 'like', '%'.$nombre.'%');
+    }
 }

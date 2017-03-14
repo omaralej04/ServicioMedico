@@ -24,8 +24,14 @@ class MedicinasController extends Controller
         if(!Auth::user()->can('ReadMedicinas'))
             abort(403,'Acceso Prohibido');
 
-        $medicinas = Medicina::paginate();
-        return view('medicinas.index', ['medicinas' => $medicinas]);
+        $medicinas = null;
+        $buscar = \Request::get('buscar');
+        if ($buscar != ''){
+            $medicinas = Medicina::nombre($buscar)->paginate(1);
+        } else {
+            $medicinas = Medicina::paginate(12);
+        }
+        return view('medicinas.index', ['medicinas' => $medicinas, 'buscar'=>$buscar]);
     }
 
     /**

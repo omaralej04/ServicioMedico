@@ -28,8 +28,14 @@ class CitasController extends Controller
         if(!Auth::user()->can('ReadCitas'))
             abort(403, 'Acceso Prohibido');
 
-        $citas = Cita::where('status', '=', 'activa')->paginate(90);
-        return view('citas.index', ['citas'=>$citas]);
+        $citas = null;
+        $buscar = \Request::get('buscar');
+        if ($buscar != ''){
+            $citas = Cita::fecha($buscar)->paginate(12);
+        } else {
+            $citas = Cita::where('status', '=', 'activa')->paginate(12);
+        }
+        return view('citas.index', ['citas'=>$citas, 'buscar'=>$buscar]);
     }
 
     /**

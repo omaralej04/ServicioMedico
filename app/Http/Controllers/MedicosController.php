@@ -27,8 +27,14 @@ class MedicosController extends Controller
         if(!Auth::user()->can('ReadMedicos'))
             abort(403,'Acceso Prohibido');
 
-        $medicos = User::role('Medico')->paginate();
-        return view('medicos.index', ['medicos' => $medicos]);
+        $medicos = null;
+        $buscar = \Request::get('buscar');
+        if ($buscar != ''){
+            $medicos = User::role('Medico')->cedula($buscar)->paginate(1);
+        } else {
+            $medicos = User::role('Medico')->paginate(12);
+        }
+        return view('medicos.index', ['medicos' => $medicos, 'buscar'=>$buscar]);
     }
 
     /**

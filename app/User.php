@@ -41,5 +41,10 @@ class User extends Authenticatable
     public function historial(){
         return $this->hasMany('App\Historial');
     }
+
+    public function scopeCedula($query, $cedula)
+    {
+        return $query->where('cedula', 'like', '%'.$cedula.'%');
+    }
 }
 

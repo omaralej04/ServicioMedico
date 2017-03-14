@@ -26,4 +26,9 @@ class Cita extends Model
     public function usermedico(){
         return $this->belongsTo('App\User', 'medico_id');
     }
+
+    public function scopeFecha($query, $fecha)
+    {
+        return $query->where('fecha_cita', 'like', '%'.$fecha.'%');
+    }
 }

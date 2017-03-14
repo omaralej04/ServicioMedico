@@ -21,6 +21,18 @@
                             </a>
                         @endif
                         <br>
+                        <div class="col-lg-6 col-lg-offset-6">
+                            <form action="{{ url('/farmaceutas') }}" method="get">
+                                <div class="input-group">
+                                    <input type="text" name="buscar" id="buscar" class="form-control" placeholder="Buscar por Cedula..." value="{{ @$buscar }}">
+                                    <span class="input-group-btn">
+                    <button class="btn btn-group-sm" type="submit"><i class="fa fa-search"></i></button>
+                </span>
+                                </div>
+                            </form>
+                        </div>
+                        <br>
+                        <br>
                     </div>
 
                     <div class="panel-body">
@@ -81,6 +93,11 @@
                                 </div>
                             </div>
                         @endforeach
+                            <div class="col-sm-6">
+                                <p class="text-center">
+                                    {{ $farmaceutas->appends(['buscar'=>$buscar])->links() }}
+                                </p>
+                            </div>
                     </div>
                 </div>
             </div>
