@@ -2,53 +2,32 @@
 
 namespace App\Http\Controllers;
 
+use App\Recipe;
 use Illuminate\Http\Request;
+use App\Cita;
+use App\Historial;
+use App\User;
+use App\Medicina;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
+use Validator;
+use Auth;
 
 class RecipesController extends Controller
 {
-    public function ver_recipe()
+    public function ver_recipe($id)
     {
-        //todo
+        $historia = Historial::findOrFail($id);
+        return view('recipes.view', ['historia'=>$historia]);
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function crearRecipe($id)
     {
-        //
+        $historia = Historial::findOrFail($id);
+        return view('recipes.create', ['historia'=>$historia]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
     {
         //
     }

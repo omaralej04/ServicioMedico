@@ -31,4 +31,9 @@ class Historial extends Model
         return $this->belongsTo('App\Cita', 'cita_id');
     }
 
+    public function recipe()
+    {
+        return $this->hasMany('App\Recipe', 'consulta_id');
+    }
+
 }

@@ -17,8 +17,8 @@ class CreateRecipesTable extends Migration
             $table->increments('id');
             $table->integer('consulta_id')->unsigned();
             $table->foreign('consulta_id')->references('id')->on('historials');
-            $table->integer('medicina_id')->unsigned();
-            $table->foreign('medicina_id')->references('id')->on('medicinas');
+            $table->integer('farmaceuta_id')->unsigned()->nullable();
+            $table->foreign('farmaceuta_id')->references('id')->on('users');
             $table->enum('status', ['entregado', 'pendiente']);
             $table->text('descripcion');
             $table->timestamps();

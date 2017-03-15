@@ -88,6 +88,7 @@ class CitasController extends Controller
                 'observaciones' => $request->input('observaciones'),
             ]);
 
+
         }catch (\Exception $e) {
             \DB::rollback();
         }finally {
