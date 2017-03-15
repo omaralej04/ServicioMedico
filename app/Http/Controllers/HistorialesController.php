@@ -63,6 +63,9 @@ class HistorialesController extends Controller
             'informe' => 'required',
             'receta' => 'max:955',
             'observaciones' => 'required',
+            'consulta_id' => 'required',
+            'status' => 'required',
+            'descripcion' => 'required'
         ]);
 
         if ($v->fails()){
@@ -81,6 +84,17 @@ class HistorialesController extends Controller
                 'receta' => $request->input('receta').','.$request->input('receta2').','.$request->input('receta3'),
                 'observaciones' => $request->input('observaciones'),
             ]);
+
+            $recipe = Recipe::create([
+                'consulta_id' => $request->input('consulta_id'),
+                'status' => $request->input('status'),
+                'descripcion' => $request->input('descripcion'),
+            ]);
+            $recipe->medicina()->detach(Medicina::all());
+            $medicinas = $request->input('medicinas[]');
+            foreach ($medicinas as $medicina)
+                $recipe->medicina()->attach($medicina);
+
 
             $cita = Cita::findOrFail($request->input('cita_id'));
             $cita->update([

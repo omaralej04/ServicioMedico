@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Spatie\Permission\Traits\HasRoles;
 use Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,6 +12,8 @@ use Spatie\Permission\Models\Role;
 
 class FarmaceutasController extends Controller
 {
+    use HasRoles;
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -34,7 +37,13 @@ class FarmaceutasController extends Controller
             $farmaceutas = User::role('Farmaceuta')->paginate(12);
         }
 
-        return view('farmaceutas.index', ['farmaceutas' => $farmaceutas, 'buscar'=>$buscar]);
+        $userid = Auth::id();
+        $usuario = User::findOrFail($userid);
+        if ($usuario->hasRole('Farmaceuta'))
+            $t = true;
+        else
+            $t = false;
+        return view('farmaceutas.index', ['farmaceutas' => $farmaceutas, 'buscar'=>$buscar, 'usuario'=>$usuario, 't'=>$t]);
     }
 
     /**

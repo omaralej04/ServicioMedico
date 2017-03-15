@@ -22,6 +22,8 @@ Route::get('/home', 'HomeController@index');
 Route::resource('/users', 'UsersController');
 Route::get('/miscitas', 'UsersController@miscitasactivas');
 Route::get('/miscitasinac', 'UsersController@miscitasinac');
+Route::get('/misrecipes', 'UsersController@misrecipes');
+Route::get('/misrecipesinac', 'UsersController@misrecipesinac');
 
 Route::get('/users/{id}/historias', 'HistorialesController@userHistoria');
 Route::get('/users/{id}/historias/create', 'HistorialesController@historiaCreate');
@@ -31,6 +33,8 @@ Route::delete('/historia/{id}', 'HistorialesController@destroy');
 Route::get('/historia/{id}/recipe', 'RecipesController@ver_recipe');
 Route::get('/historia/{id}/createrecp', 'RecipesController@crearRecipe');
 Route::post('/historia/{id}/recipe', 'RecipesController@store');
+
+Route::get('/recipes/all', 'RecipesController@index');
 
 Route::resource('/medicos', 'MedicosController');
 Route::resource('/farmaceutas', 'FarmaceutasController');

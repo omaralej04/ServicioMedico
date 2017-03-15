@@ -52,7 +52,7 @@ class RecipesController extends Controller
                 'descripcion' => $request->input('descripcion'),
             ]);
             $recipe->medicina()->detach(Medicina::all());
-            $medicinas = $request->input('specializations');
+            $medicinas = $request->input('medicinas[]');
             foreach ($medicinas as $medicina)
                 $recipe->medicina()->attach($medicina);
 
@@ -64,24 +64,12 @@ class RecipesController extends Controller
         return redirect('/users')->with('mensaje', 'Recipe Asignado');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+    public function index()
+   {
+      $recipes = Recipe::where('status', '=', 'pendiente');
+       return view('recipes.index', ['recipes'=>$recipes]);
+   }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         //

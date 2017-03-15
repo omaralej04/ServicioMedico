@@ -67,7 +67,7 @@
                                 <div class="col-md-6">
                                     @foreach($medicinas as $medicina)
 
-                                        <input type="checkbox" name="medicina[]" value="{{$medicina->id}}">{{$medicina->nombre}}&#8195;
+                                        <input type="checkbox" name="medicinas[]" value="{{$medicina->id}}">{{$medicina->nombre}}&#8195;
 
                                         @endforeach
                                     @if ($errors->has('medicinas'))

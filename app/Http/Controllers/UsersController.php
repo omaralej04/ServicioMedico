@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Cita;
+use App\Historial;
+use App\Recipe;
 use App\User;
 use Validator;
 use Illuminate\Http\Request;
@@ -233,5 +235,27 @@ class UsersController extends Controller
         ])->get();
 
         return view('users.miscitasinac', ['user'=>$user, 'citas'=>$citas]);
+    }
+
+    public function misrecipes()
+    {
+        $userId = Auth::id();
+        $user = \DB::table('users')->where('id', '=', $userId)->get();
+        $recipes = Recipe::where([
+            ['paciente_id', '=', $userId], ['status', '=', 'pendiente'],
+        ])->get();
+
+        return view('users.misrecipes', ['user'=>$user, 'recipes'=>$recipes]);
+    }
+
+    public function misrecipesinac()
+    {
+        $userId = Auth::id();
+        $user = \DB::table('users')->where('id', '=', $userId)->get();
+        $recipes = Recipe::where([
+            ['paciente_id', '=', $userId], ['status', '=', 'entregado'],
+        ])->get();
+
+        return view('users.misrecipesinac', ['user'=>$user, 'recipes'=>$recipes]);
     }
 }

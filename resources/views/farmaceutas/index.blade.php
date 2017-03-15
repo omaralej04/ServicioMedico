@@ -20,6 +20,11 @@
                                 <i class="fa fa-user"></i> Nuevo Usuario
                             </a>
                         @endif
+                        @if($t)
+                            <a href="{{ url('/recipes/all') }}" class="btn btn-success btn-block">
+                                <i class="fa fa-id-badge"></i> Recipes Pendientes
+                            </a>
+                        @endif
                         <br>
                         <div class="col-lg-6 col-lg-offset-6">
                             <form action="{{ url('/farmaceutas') }}" method="get">
