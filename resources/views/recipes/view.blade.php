@@ -11,12 +11,14 @@
                         <a href="{{ url('/users') }}" class="btn btn-danger btn-block">
                             <i class="fa  fa-arrow-left"></i> Regresar
                         </a>
-                        <a href="{{url('/historia/'.$historia->id.'/createrecp')}}" class="btn btn-danger btn-block">
-                            <i class="fa fa-arrow-left"></i> Generar Recipe
+                        <a href="{{url('/historia/'.$historia->id.'/createrecp')}}" class="btn btn-success btn-block">
+                            <i class="fa fa-id-badge"></i> Generar Recipe
                         </a>
                         <br>
                     </div>
                     <div class="panel-body">
+                        @foreach($recipes as $recipe)
+                            <p>{{$recipe}}</p>
                             {{--<div class="col-md-8 col-md-offset-2">--}}
                                 {{--<div class="card text-center">--}}
                                     {{--<div class="card-header">--}}
@@ -89,7 +91,7 @@
                                 {{--</div>--}}
                             {{--</div>--}}
                             {{--<br>--}}
-                        {{--@endforeach--}}
+                        @endforeach
                     </div>
                 </div>
             </div>

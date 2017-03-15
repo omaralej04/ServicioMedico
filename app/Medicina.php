@@ -19,4 +19,9 @@ class Medicina extends Model
     {
         return $query->where('nombre', 'like', '%'.$nombre.'%');
     }
+
+    public function recipe()
+    {
+        return $this->belongsToMany('App\Recipe');
+    }
 }

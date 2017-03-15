@@ -10,10 +10,16 @@ class Recipe extends Model
     use Notifiable;
 
     protected $fillable = [
-        'consulta_id', 'status', 'medicina', 'descripcion'
+        'consulta_id', 'farmaceuta_id', 'status', 'descripcion'
     ];
 
-    public function historia(){
-        return $this->belongsTo('App\Historial', 'consulta_id');
+    public function historia()
+    {
+        return $this->belongsToMany('App\Historial');
+    }
+
+    public function medicina()
+    {
+        return $this->belongsToMany('App\Medicina');
     }
 }
