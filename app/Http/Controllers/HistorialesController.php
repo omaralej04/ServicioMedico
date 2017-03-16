@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use App\Recipe;
 
 class HistorialesController extends Controller
 {
@@ -55,22 +56,25 @@ class HistorialesController extends Controller
      */
     public function store(Request $request)
     {
-        $v = Validator::make($request->all(), [
-            'paciente_id' => 'required',
-            'especialidad_id' => 'required',
-            'medico_id' => 'required',
-            'cita_id' => 'required',
-            'informe' => 'required',
-            'receta' => 'max:955',
-            'observaciones' => 'required',
-            'consulta_id' => 'required',
-            'status' => 'required',
-            'descripcion' => 'required'
-        ]);
+//        dd($request->input());
 
-        if ($v->fails()){
-            return redirect()->back()->withErrors($v)->withInput();
-        }
+//        $v = Validator::make($request->all(), [
+//            'paciente_id' => 'required',
+//            'especialidad_id' => 'required',
+//            'medico_id' => 'required',
+//            'cita_id' => 'required',
+//            'informe' => 'required',
+//            'receta' => 'max:955',
+//            'observaciones' => 'required',
+//            'consulta_id' => 'required',
+//            'status' => 'required',
+//            'descripcion' => 'required',
+//            'medicinas' => 'required'
+//        ]);
+//
+//        if ($v->fails()){
+//            return redirect()->back()->withErrors($v)->withInput();
+//        }
 
         try {
             \DB::beginTransaction();
@@ -81,25 +85,24 @@ class HistorialesController extends Controller
                 'medico_id' => $request->input('medico_id'),
                 'cita_id' => $request->input('cita_id'),
                 'informe' => $request->input('informe'),
-                'receta' => $request->input('receta').','.$request->input('receta2').','.$request->input('receta3'),
+                'receta' => $request->input('receta'),
                 'observaciones' => $request->input('observaciones'),
             ]);
 
             $recipe = Recipe::create([
-                'consulta_id' => $request->input('consulta_id'),
+                'consulta_id' => $historia->id,
                 'status' => $request->input('status'),
                 'descripcion' => $request->input('descripcion'),
             ]);
-            $recipe->medicina()->detach(Medicina::all());
-            $medicinas = $request->input('medicinas[]');
-            foreach ($medicinas as $medicina)
-                $recipe->medicina()->attach($medicina);
 
+
+            $recipe->medicina()->sync($request->input('medicinas'));
 
             $cita = Cita::findOrFail($request->input('cita_id'));
             $cita->update([
                 'status' => 'inactiva'
             ]);
+
 
         }catch (\Exception $e) {
             \DB::rollback();
@@ -114,9 +117,6 @@ class HistorialesController extends Controller
     {
         if(!Auth::user()->can('DeleteHistorias'))
             abort(403, 'Acceso Prohibido');
-
-        if(!Auth::user()->can('DeleteUsers'))
-            abort(403, 'Permiso Denegado.');
 
         Historial::destroy($id);
         return redirect('/users')->with('mensaje', 'Historia Eliminada');

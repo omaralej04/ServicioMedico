@@ -18,50 +18,9 @@ class RecipesController extends Controller
     public function ver_recipe($id)
     {
         $historia = Historial::findOrFail($id);
-        $recipes = $historia->recipe();
-        return view('recipes.view', ['historia'=>$historia, 'recipes'=>$recipes]);
-    }
+        $medicinas = \DB::table('recipe_medicinas')->where('recipe_id', '=', $historia->recipe[0]->id)->paginate(3);
 
-    public function crearRecipe($id)
-    {
-        $medicinas = Medicina::all();
-        $historia = Historial::findOrFail($id);
-        return view('recipes.create', ['historia'=>$historia, 'medicinas'=>$medicinas]);
-    }
-
-    public function store(Request $request)
-    {
-        $medicinas = Medicina::all();
-
-        $v = Validator::make($request->all(), [
-           'consulta_id' => 'required',
-            'status' => 'required',
-            'descripcion' => 'required',
-        ]);
-
-        if ($v->fails()){
-            return redirect()->back()->withErrors($v)->withInput();
-        }
-
-        try{
-            \DB::beginTransaction();
-
-            $recipe = Recipe::create([
-               'consulta_id' => $request->input('consulta_id'),
-                'status' => $request->input('status'),
-                'descripcion' => $request->input('descripcion'),
-            ]);
-            $recipe->medicina()->detach(Medicina::all());
-            $medicinas = $request->input('medicinas[]');
-            foreach ($medicinas as $medicina)
-                $recipe->medicina()->attach($medicina);
-
-        }catch (\Exception $e){
-            \DB::rollback();
-        }finally{
-            \DB::commit();
-        }
-        return redirect('/users')->with('mensaje', 'Recipe Asignado');
+        return view('recipes.view', ['historia'=>$historia, 'medicinas'=>$medicinas]);
     }
 
     public function index()

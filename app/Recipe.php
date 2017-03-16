@@ -20,6 +20,6 @@ class Recipe extends Model
 
     public function medicina()
     {
-        return $this->belongsToMany('App\Medicina');
+        return $this->hasMany('App\Medicina', 'recipe_medicinas', 'recipe_id');
     }
 }

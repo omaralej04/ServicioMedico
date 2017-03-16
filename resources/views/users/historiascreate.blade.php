@@ -103,44 +103,12 @@
                             <div class="form-group{{ $errors->has('receta') ? ' has-error' : '' }}">
                                 <label for="receta" class="col-md-4 control-label">Receta </label>
                                 <div class="col-md-6">
-                                    <select name="receta" id="receta" class="form-control">
-                                        <option value="">Seleccione</option>
-                                    @foreach($medicinas as $medicina)
-                                            <option value="{{ $medicina->nombre }}">
-                                                {{ $medicina->nombre }}
-                                            </option>
-                                        @endforeach
-                                    </select>
+                                   <textarea id="receta" class="form-control" name="receta" required
+                                    style="resize: none;">
+
+                                       </textarea>
                                     </div>
                                 </div>
-
-                            <div class="form-group">
-                                <label for="receta2" class="col-md-4 control-label">Receta 2</label>
-                                <div class="col-md-6">
-                                    <select name="receta2" id="receta2" class="form-control">
-                                        <option value="">Seleccione</option>
-                                        @foreach($medicinas as $medicina)
-                                            <option value="{{ $medicina->nombre }}">
-                                                {{ $medicina->nombre }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                </div>
-
-                            <div class="form-group">
-                                <label for="receta3" class="col-md-4 control-label">Receta 3</label>
-                                <div class="col-md-6">
-                                    <select name="receta3" id="receta3" class="form-control">
-                                        <option value="">Seleccione</option>
-                                        @foreach($medicinas as $medicina)
-                                            <option value="{{ $medicina->nombre }}">
-                                                {{ $medicina->nombre }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
 
                             <div class="form-group{{ $errors->has('observaciones') ? ' has-error' : '' }}">
                                 <label for="observaciones" class="col-md-4 control-label">Observaciones</label>
@@ -153,6 +121,63 @@
                                     @if ($errors->has('observaciones'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('observaciones') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <br>
+                                <h3>Recipe:</h3>
+                                <br>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('stauts') ? ' has-error' : '' }}">
+                                <label for="status" class="col-md-4 control-label">Status</label>
+
+                                <div class="col-md-6">
+                                    <select name="status" id="status" class="form-control">
+                                        <option value="pendiente">Pendiente</option>
+                                        <option value="entregado">Entregado</option>
+
+                                    </select>
+
+                                    @if ($errors->has('status'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('status') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('medicinas') ? ' has-error' : '' }}">
+                                <label for="medicinas" class="col-md-4 control-label">Medicinas (Max. 3)</label>
+
+                                <div class="col-md-6">
+                                    @foreach($medicinas as $medicina)
+
+                                        <input type="checkbox" name="medicinas[]" value="{{$medicina->id}}">{{$medicina->nombre}}&#8195;
+
+                                    @endforeach
+                                    @if ($errors->has('medicinas'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('medicinas') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('descripcion') ? ' has-error' : '' }}">
+                                <label for="descripcion" class="col-md-4 control-label">Descripcion</label>
+
+                                <div class="col-md-6">
+                                    <textarea id="descripcion" class="form-control" name="descripcion" required
+                                              style="resize: none">
+
+                                    </textarea>
+                                    @if ($errors->has('descripcion'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('descripcion') }}</strong>
                                     </span>
                                     @endif
                                 </div>

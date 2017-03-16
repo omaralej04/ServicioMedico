@@ -13,7 +13,7 @@ class CreateRecipeMedicinasTable extends Migration
      */
     public function up()
     {
-        Schema::create('recipe-medicinas', function (Blueprint $table) {
+        Schema::create('recipe_medicinas', function (Blueprint $table) {
             $table->integer('recipe_id')->unsigned();
             $table->foreign('recipe_id')->references('id')->on('recipes');
             $table->integer('medicina_id')->unsigned();
@@ -29,6 +29,6 @@ class CreateRecipeMedicinasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('recipe-medicinas');
+        Schema::dropIfExists('recipe_medicinas');
     }
 }
