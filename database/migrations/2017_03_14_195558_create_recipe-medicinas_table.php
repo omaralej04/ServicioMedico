@@ -18,7 +18,7 @@ class CreateRecipeMedicinasTable extends Migration
             $table->foreign('recipe_id')->references('id')->on('recipes');
             $table->integer('medicina_id')->unsigned();
             $table->foreign('medicina_id')->references('id')->on('medicinas');
-            $table->timestamps();
+            $table->primary(['recipe_id','medicina_id']);
         });
     }
 

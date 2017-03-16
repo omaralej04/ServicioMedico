@@ -56,7 +56,7 @@ class HistorialesController extends Controller
      */
     public function store(Request $request)
     {
-//        dd($request->input());
+        //dd($request->input());
 
 //        $v = Validator::make($request->all(), [
 //            'paciente_id' => 'required',
@@ -89,14 +89,20 @@ class HistorialesController extends Controller
                 'observaciones' => $request->input('observaciones'),
             ]);
 
+            //dd($historia);
+
             $recipe = Recipe::create([
                 'consulta_id' => $historia->id,
                 'status' => $request->input('status'),
                 'descripcion' => $request->input('descripcion'),
             ]);
 
+            //dd($request->input());
+
 
             $recipe->medicina()->sync($request->input('medicinas'));
+
+            //dd($medicinas);
 
             $cita = Cita::findOrFail($request->input('cita_id'));
             $cita->update([
