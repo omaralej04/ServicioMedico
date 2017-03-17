@@ -44,7 +44,7 @@
                                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                     <input type="hidden" name="_method" value="PATCH"/>
                                                     <button type="submit" class="btn btn-info">
-                                                        <i class="fa fa-close"></i>
+                                                        <i class="fa fa-telegram"></i> Entregado
                                                     </button>
                                                 </form>
                                             </div>

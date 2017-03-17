@@ -157,7 +157,7 @@
                                     @foreach($medicinas as $medicina)
 
                                         <input type="checkbox" name="medicinas[]" value="{{$medicina->id}}">{{$medicina->nombre}}&#8195;
-
+                                        <br>
                                     @endforeach
                                     @if ($errors->has('medicinas'))
                                         <span class="help-block">

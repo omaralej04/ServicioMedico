@@ -40,7 +40,7 @@
                                     <div class="card-footer">
                                         <div class="row">
                                             <div class="col-sm-6">
-                                                <form method="POST" action="/recipes/{{ $recipe->id }}">
+                                                <form method="POST" action="/recipes/{{ $recipe->id }}/res">
                                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                     <input type="hidden" name="_method" value="PATCH"/>
                                                     <button type="submit" class="btn btn-info">
