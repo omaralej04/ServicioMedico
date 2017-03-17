@@ -33,7 +33,7 @@ class Historial extends Model
 
     public function recipe()
     {
-        return $this->hasMany('App\Recipe', 'consulta_id');
+        return $this->hasOne('App\Recipe', 'consulta_id', 'id');
     }
 
 }

@@ -25,13 +25,34 @@ class RecipesController extends Controller
 
     public function index()
    {
-      $recipes = Recipe::where('status', '=', 'pendiente');
+       $recipes = Recipe::where('status', '=', 'pendiente')->paginate(12);
        return view('recipes.index', ['recipes'=>$recipes]);
    }
 
-    public function update(Request $request, $id)
+   public function indexinac()
+   {
+       $recipes = Recipe::where('status', '=', 'entregado')->paginate(12);
+       return view('recipes.indexinac', ['recipes'=>$recipes]);
+   }
+
+    public function updateStatus($id)
     {
-        //
+        $recipe = Recipe::findOrFail($id);
+        $recipe->update([
+            'status' => 'entregado'
+        ]);
+
+        return redirect('/recipes/all')->with('mensaje', 'recipe editado...');
+    }
+
+    public function updateStatusT($id)
+    {
+        $recipe = Recipe::findOrFail($id);
+        $recipe->update([
+            'status' => 'pendiente'
+        ]);
+
+        return redirect('/recipes/all')->with('mensaje', 'recipe editado...');
     }
 
     /**

@@ -11,8 +11,8 @@
                         <a href="{{ url('/farmaceutas') }}" class="btn btn-danger btn-block">
                             <i class="fa  fa-arrow-left"></i> Regresar
                         </a>
-                        <a href="{{ url('/recipes/allinac') }}" class="btn btn-inverse btn-block">
-                            <i class="fa fa-calendar-minus-o"></i> Recipes Entregados
+                        <a href="{{ url('/recipes/all') }}" class="btn btn-inverse btn-block">
+                            <i class="fa fa-calendar-minus-o"></i> Recipes Activos
                         </a>
                         <br>
                     </div>

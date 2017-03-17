@@ -15,7 +15,7 @@ class Recipe extends Model
 
     public function historia()
     {
-        return $this->belongsToMany('App\Historial');
+        return $this->belongsTo('App\Historial', 'consulta_id');
     }
 
     public function medicina()

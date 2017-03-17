@@ -35,6 +35,9 @@ Route::get('/historia/{id}/createrecp', 'RecipesController@crearRecipe');
 Route::post('/historia/{id}/recipe', 'RecipesController@store');
 
 Route::get('/recipes/all', 'RecipesController@index');
+Route::get('/recipes/allinac', 'RecipesController@indexinac');
+Route::patch('recipes/{id}', 'RecipesController@updateStatus');
+Route::patch('recipes/{id}/res', 'RecipesController@updateStatusT');
 
 Route::resource('/medicos', 'MedicosController');
 Route::resource('/farmaceutas', 'FarmaceutasController');
