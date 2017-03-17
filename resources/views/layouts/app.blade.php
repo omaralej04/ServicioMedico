@@ -13,7 +13,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{asset('css/font-awesome.css')}}" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+    {{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">--}}
 
     <!-- Scripts -->
     <script>
@@ -24,6 +24,7 @@
 </head>
 <body>
     <div id="app">
+
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
@@ -39,10 +40,7 @@
                     <!-- Branding Image -->
                     <ul class="nav navbar-nav navbar-left">
                         <li>
-                            <a class="" href="{{ url('/') }}">
-                                <h5>
-                                    {{ config('app.name', 'Laravel') }}
-                                </h5>
+                            <a class="navbar-brand" href="{{ url('/') }}">ServicioMedico</a>
                             </a>
                         </li>
                     </ul>

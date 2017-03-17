@@ -13,7 +13,7 @@
                                 Bienvenido {{$user->nombre}}!
                             </div>
                             <div class="card-block">
-                                <h3 class="card-title">Tus Datos</h3>
+                                <h4 class="card-title">Tus Datos</h4>
                                 <p class="card-text">Nombre: {{$user->nombre . ' ' . $user->apellido}}</p>
                                 <p class="card-text">Identificacion: {{$user->cedula}}</p>
                                 <p class="card-text">E-Mail: {{$user->email}}</p>
@@ -23,11 +23,12 @@
                                 Id: {{$user->id}}
                             </div>
                         </div>
+                        <br>
                     </div>
                 @endforeach
 
                 @if(Auth::user()->hasRole('Paciente'))
-                    <div class="col-sm-6" style="min-height: 250px;">
+                    <div class="col-sm-6 col-sm-offset-3" style="min-height: 250px;">
                         <div class="card text-center">
                             <div class="card-block">
                                 <h3 class="card-title">Citas</h3>
@@ -44,24 +45,6 @@
                             </div>
                         </div>
                     </div>
-
-                        <div class="col-sm-6" style="min-height: 250px;">
-                            <div class="card text-center">
-                                <div class="card-block">
-                                    <h3 class="card-title">Recipes</h3>
-                                    <h6>
-                                        Ir al area que muestra todos tus Recipes con sus datos.
-                                        <span class="text-muted">Recetas, Observaciones y su Status</span>
-                                    </h6>
-                                </div>
-                                <div class="card-footer">
-                                    <a href="{{ url('/misrecipes') }}"
-                                       class="btn btn-primary">
-                                        <i class="fa fa-angle-double-right"></i>&#8195;Ir
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
 
                 @else
                     <div class="col-sm-4" style="min-height: 250px;">

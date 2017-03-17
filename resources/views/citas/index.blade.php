@@ -93,6 +93,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <br>
                             </div>
                         @endforeach
                         <div class="col-sm-6">

@@ -241,8 +241,9 @@ class UsersController extends Controller
     {
         $userId = Auth::id();
         $user = \DB::table('users')->where('id', '=', $userId)->get();
-        $recipes = Recipe::where([
-            ['paciente_id', '=', $userId], ['status', '=', 'pendiente'],
+        $historias = \DB::table('historials')->where('paciente_id', '=', $userId)->get();
+        $recipes = Recipe::whereIn([
+            'consulta_id', '=', $historias->id,
         ])->get();
 
         return view('users.misrecipes', ['user'=>$user, 'recipes'=>$recipes]);
