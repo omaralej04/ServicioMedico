@@ -33,7 +33,14 @@
                                             {{$recipe->historia->usermedico->especialidad->nombre}}
                                         </h6>
                                         <h6>
-                                            Medicinas: {{$recipe->medicina[0]->nombre}}
+                                            Medicinas:
+                                            {{$recipe->medicina[0]->nombre}},
+                                            @if(isset($recipe->medicina[1]))
+                                                {{$recipe->medicina[1]->nombre}},
+                                            @endif
+                                            @if(isset($recipe->medicina[2]))
+                                            {{$recipe->medicina[2]->nombre}}
+                                                @endif
                                         </h6>
                                         <h6>Descripcion: {{$recipe->descripcion}}</h6>
                                     </div>
